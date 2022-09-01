@@ -1,0 +1,27 @@
+﻿FUNCTION "Encrav_Inputs_HMI" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	IF "Inputs_HMI".MAN_AUTO = TRUE THEN
+	    "Inputs_HMI".ON_OFF_MX201 := FALSE;
+	    "Inputs_HMI".ON_OFF_MX301 := FALSE;
+	    "Inputs_HMI".ON_OFF_MX601 := FALSE;
+	    "Inputs_HMI".ON_OFF_MX603 := FALSE;
+	    "Inputs_HMI".ON_OFF_MX604 := FALSE;
+	    "Inputs_HMI".ON_OFF_MX605 := FALSE;
+	    "Inputs_HMI".ON_OFF_BS001A := FALSE;
+	    "Inputs_HMI".ON_OFF_BS001B := FALSE;
+	    "Inputs_HMI".ON_OFF_BS501 := FALSE;
+	    "Inputs_HMI".ON_OFF_BH201 := FALSE;
+	    "Inputs_HMI".ON_OFF_BM401 := FALSE;
+	    "Inputs_HMI".ON_OFF_BD601 := FALSE;
+	    "Inputs_HMI".ON_OFF_BD602 := FALSE;
+	    "Inputs_HMI".ON_OFF_BD603 := FALSE;
+	    "Inputs_HMI".ON_OFF_BD604 := FALSE;
+	    "Inputs_HMI".ON_OFF_BD605 := FALSE;
+	    "Inputs_HMI".ON_OFF_XV101 := FALSE;
+	    "Inputs_HMI".ON_OFF_XV102 := FALSE;
+	END_IF;
+END_FUNCTION
+

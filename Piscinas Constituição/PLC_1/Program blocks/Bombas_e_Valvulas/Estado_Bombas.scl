@@ -1,0 +1,59 @@
+﻿FUNCTION "Estado_Bombas" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//SINALIZAÇÃO DO ESTADO DAS BOMBAS PARA HMI
+	
+	REGION ESTADO_BOMBA_1
+	    IF "BOMBA_1_VAR" = TRUE AND NOT "AVARIA_BOMBA_1" THEN  //BOMBA LIGADA
+	        "Estados_HMI".BOMBA_1_ESTADO := 1;
+	        "Estados_HMI".BOMBA_1_ESTADO_PAGCMD := 1;
+	    END_IF;
+	    
+	    IF "BOMBA_1_VAR" = FALSE AND NOT "AVARIA_BOMBA_1" THEN  //BOMBA DESLIGADA
+	        "Estados_HMI".BOMBA_1_ESTADO := 0;
+	        "Estados_HMI".BOMBA_1_ESTADO_PAGCMD := 0;
+	    END_IF;
+	    
+	    IF "AVARIA_BOMBA_1" THEN  //BOMBA AVARIA
+	        "Estados_HMI".BOMBA_1_ESTADO := 2;
+	        "Estados_HMI".BOMBA_1_ESTADO_PAGCMD := 2;
+	    END_IF;
+	END_REGION
+	
+	REGION ESTADO_BOMBA_2
+	    IF "BOMBA_2_VAR" = TRUE AND NOT "AVARIA_BOMBA_2" THEN  //BOMBA LIGADA
+	        "Estados_HMI".BOMBA_2_ESTADO := 1;
+	        "Estados_HMI".BOMBA_2_ESTADO_PAGCMD := 1;
+	    END_IF;
+	    
+	    IF "BOMBA_2_VAR" = FALSE AND NOT "AVARIA_BOMBA_2" THEN  //BOMBA DESLIGADA
+	        "Estados_HMI".BOMBA_2_ESTADO := 0;
+	        "Estados_HMI".BOMBA_2_ESTADO_PAGCMD := 0;
+	    END_IF;
+	    
+	    IF "AVARIA_BOMBA_2" THEN  //BOMBA AVARIA
+	        "Estados_HMI".BOMBA_2_ESTADO := 2;
+	        "Estados_HMI".BOMBA_2_ESTADO_PAGCMD := 2;
+	    END_IF;
+	END_REGION
+	
+	REGION ESTADO_BOMBA_3
+	    IF "BOMBA_3_RESERVA" = TRUE AND NOT "AVARIA_BOMBA_3" THEN  //BOMBA LIGADA
+	        "Estados_HMI".BOMBA_3_ESTADO := 1;
+	        "Estados_HMI".BOMBA_3_ESTADO_PAGCMD := 1;
+	    END_IF;
+	    
+	    IF "BOMBA_3_RESERVA" = FALSE AND NOT "AVARIA_BOMBA_3" THEN  //BOMBA DESLIGADA
+	        "Estados_HMI".BOMBA_3_ESTADO := 0;
+	        "Estados_HMI".BOMBA_3_ESTADO_PAGCMD := 0;
+	    END_IF;
+	    
+	    IF "AVARIA_BOMBA_3" THEN  //BOMBA AVARIA
+	        "Estados_HMI".BOMBA_3_ESTADO := 2;
+	        "Estados_HMI".BOMBA_3_ESTADO_PAGCMD := 2;
+	    END_IF;
+	END_REGION
+END_FUNCTION
+

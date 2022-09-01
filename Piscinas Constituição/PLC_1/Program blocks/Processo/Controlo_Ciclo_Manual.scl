@@ -1,0 +1,78 @@
+﻿FUNCTION "Controlo_Ciclo_Manual" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	REGION controlo_etapa_anterior
+	    //este bloco serve para saber qual a posição das válvulas antes da passagem para modo manual
+	    IF "Etapas_Grafcet".ETAPA_1 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 1;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_2 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 2;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_3 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 3;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_4 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 4;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_5 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 5;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_6 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 6;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_7 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 7;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_8 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 8;
+	    END_IF;
+	    
+	    IF "Etapas_Grafcet".ETAPA_9 = TRUE THEN
+	        "Dados_Ciclo".ETAPA_ANTERIOR := 9;
+	    END_IF;
+	    
+	END_REGION
+	REGION controlo_etapa_13
+	    // este bloco serve para reduzir o numero de contactos na nw13 do ciclo de limpeza
+	    IF "Etapas_Grafcet".ETAPA_1 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_2 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_3 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_4 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_5 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_6 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_7 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_8 = TRUE OR
+	       "Etapas_Grafcet".ETAPA_9 = TRUE
+	    THEN
+	        "Dados_Ciclo".ETAPA_N := TRUE;
+	    END_IF;
+	    
+	    //reset às etaps de 1 a 9 pela etapa 13
+	    IF "Etapas_Grafcet".ETAPA_13 = TRUE
+	    THEN
+	        "Etapas_Grafcet".ETAPA_1 := FALSE;
+	        "Etapas_Grafcet".ETAPA_2 := FALSE;
+	        "Etapas_Grafcet".ETAPA_3 := FALSE;
+	        "Etapas_Grafcet".ETAPA_4 := FALSE;
+	        "Etapas_Grafcet".ETAPA_5 := FALSE;
+	        "Etapas_Grafcet".ETAPA_6 := FALSE;
+	        "Etapas_Grafcet".ETAPA_7 := FALSE;
+	        "Etapas_Grafcet".ETAPA_8 := FALSE;
+	        "Etapas_Grafcet".ETAPA_9 := FALSE;
+	        
+	        "Dados_Ciclo".ETAPA_N := FALSE;
+	    END_IF;
+	    
+	END_REGION
+END_FUNCTION
+
