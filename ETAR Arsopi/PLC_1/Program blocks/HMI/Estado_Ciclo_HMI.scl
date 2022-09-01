@@ -1,0 +1,12 @@
+﻿FUNCTION "Estado_Ciclo_HMI" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	IF ("Etapas_Grafcet_1".ETAPA_1 = TRUE) OR ("Inputs_HMI".MAN_AUTO = FALSE) OR ("BOT_EMERGÊNCIA" = FALSE) THEN
+	    "Info_Ciclo".ESTADO_CICLO := FALSE;
+	ELSE
+	    "Info_Ciclo".ESTADO_CICLO := TRUE;
+	END_IF;
+END_FUNCTION
+

@@ -1,0 +1,11 @@
+﻿FUNCTION "Conversão_TLAV_TRINSE" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//Conversão do tempo decorrido de lavagem e enxaguamento para minutos
+	
+	"Estados_HMI".T_LAV_MINUTOS := (TIME_TO_DINT("T_LAVAGEM".ET) MOD 3600000) / 60000;
+	"Estados_HMI".T_RINSE_MINUTOS := (TIME_TO_DINT("T_RINSE".ET) MOD 3600000) / 60000;
+END_FUNCTION
+
