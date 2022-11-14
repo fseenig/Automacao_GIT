@@ -1,0 +1,128 @@
+﻿FUNCTION "FC300_SetFilm" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      Mode : UInt;
+      Tiro : UInt;
+      Prestiro : UInt;
+   END_VAR
+
+   VAR_OUTPUT 
+      SP_Tiro : Real;
+      SP_Prestiro : Real;
+      Tiro_obiettivo : UInt;
+   END_VAR
+
+   VAR_IN_OUT 
+      PID : "PID";
+   END_VAR
+
+   VAR_TEMP 
+      freqT : DInt;
+      freqP : DInt;
+      tempo : UInt;
+      t_temp : Time;
+      velocita : DInt;
+      correttivoTiro : UInt;
+      correttivoPrestiro : UInt;
+      rapporto : DInt;
+      tiro_temp : UInt;
+      clock : Bool;
+   END_VAR
+
+   VAR CONSTANT 
+      BASE_PRESTIRO : UInt := 100;
+      MAX_PRESTIRO_T0 : UInt := 75;
+      MAX_PRESTIRO_PVS : UInt := 400;
+      RAPP_PRES : UInt := 200;
+   END_VAR
+
+
+BEGIN
+	(**)
+	
+	#freqT := 0;
+	#freqP := 0;
+	
+	//Copia del valore di tiro per confronti in gestione RAMPA [partenza/fine ciclo] (OB30)
+	#Tiro_obiettivo := #Tiro;
+	
+	IF (#PID.setTiro) THEN
+	    //Fisso il tiro obiettivo senza passare dalla rampa. Mi serve in avvio ciclo o quando riparto
+	    //#PID.tiro := #Tiro;
+	    #PID.setTiro := FALSE;
+	    //"SetFilmStep" := 1;
+	END_IF;
+	
+	//#tiro_temp := #PID.tiro;
+	
+	//CARRELLO PVS
+	//
+	IF (#Mode = 2) THEN //FILM_RUN
+	    //Eseguo il calcolo dei parametri (PID) solo ad ogni nuovo valore letto dalla cella (scheda prestiro)
+	    IF ("PrestNewValue") THEN
+	        "FC320_PID_ParamCalc"(Tiro := #PID.tiro,
+	                              Offset_cella := "DB215_ProgramData".Offset_cella,
+	                              PID := #PID);
+	        "PrestNewValue" := 0;
+	    END_IF;
+	    //Frequenza TIRO
+	    #velocita := #PID.segnale;
+	    #freqT := #velocita;
+	    (*
+	    //Correttivo TIRO
+	    #correttivoTiro := (#MAX_PRESTIRO_T0 - 15);//"DB230_Parameters".P_PRESTMIN);
+	    #correttivoTiro := (#correttivoTiro * (100 - #Tiro)) / 100;
+	    //CorrettivoPRESTIRO
+	    #correttivoPrestiro := ((#MAX_PRESTIRO_PVS - #Prestiro) * #Tiro) / 500;
+	    //    
+	    #rapporto := #BASE_PRESTIRO + #correttivoTiro - #correttivoPrestiro;
+	    #rapporto := #rapporto + #Prestiro;
+	    #rapporto := #rapporto + 15;//"DB230_Parameters".P_PRESTMIN;
+	    //    
+	    #velocita := #velocita * #RAPP_PRES;
+	    #velocita := #velocita / #rapporto;
+	    *)
+	    //Frequenza PRESTIRO
+	    #rapporto := #BASE_PRESTIRO + #Prestiro;
+	    #freqP := #velocita*#RAPP_PRES/#rapporto;
+	    //#freqP := #velocita*2/5;
+	    //
+	    //SP_INVERTER SIEMENS IN RPM (1500@50HZ) -> CONVERSIONE SECONDO PROPORZIONE    
+	    #SP_Tiro := DINT_TO_REAL(#freqT * 5);//10);//10);
+	    IF (#SP_Tiro >= 3000.0) THEN
+	        #SP_Tiro := 3000.0;
+	    END_IF;
+	    #SP_Prestiro := DINT_TO_REAL(#freqP * 5);//10);//10);
+	    IF (#SP_Prestiro >= 3000.0) THEN
+	        #SP_Prestiro := 3000.0;
+	    END_IF;
+	    //
+	ELSIF (#Mode = 1) THEN  // FILM_STOP - Freq.Rulli = 0 (per strappare il film durante il taglio)
+	    #SP_Tiro := 0;
+	    #SP_Prestiro := 0;
+	ELSIF (#Mode = 3) THEN     // FILM_MANUAL - Svolgimento film in manuale
+	    #SP_Tiro := 1500;
+	    #SP_Prestiro := 1500;
+	ELSIF (#Mode = 0) THEN    // FILM_DISABLE
+	    #SP_Tiro := 0;
+	    #SP_Prestiro := 0;
+	END_IF;
+	//
+	(*
+	//Film rotto o esaurito
+	//
+	//IF "CELLA" >= ("DB215_ProgramData".Offset_cella + 10) AND "Timer".T21.Q THEN
+	//
+	IF "DB230_Parameters".FilmEndEn THEN
+	    IF "DB02_Timers".T021.Q THEN
+	        "FilmEnd" := 1;
+	        "FilmEnd2" := 1;
+	    END_IF;
+	    IF "DB200_Supervisor".State_Stop = 110 THEN
+	        "FilmEnd" := 0;
+	    END_IF;
+	END_IF;
+	*)
+END_FUNCTION
+

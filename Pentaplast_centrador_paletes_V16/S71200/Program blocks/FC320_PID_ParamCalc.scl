@@ -1,0 +1,178 @@
+﻿FUNCTION "FC320_PID_ParamCalc" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      Tiro : UInt;
+      Offset_cella : Int;
+   END_VAR
+
+   VAR_IN_OUT 
+      PID : "PID";
+   END_VAR
+
+   VAR_TEMP 
+      t : UInt;
+      errore : DInt;
+      setPoint : DInt;
+      DIV_P : DInt;
+      DIV_I : DInt;
+      CELLA_DINT : DInt;
+      OFFSET_CELLA_DINT : DInt;
+      TEMPDINT : DInt;
+   END_VAR
+
+
+BEGIN
+	(**)
+	// //rotary
+	// //const USHORT #pTiro[11] = {140,120,100,90,80,70,60,50,40,30,20};
+	// //const USHORT #iTiro[11] = {140,120,100,90,80,70,60,50,40,30,20};
+	// //ROTOTECH3000
+	// //const USHORT #pTiro[11] = {70,60,50,45,40,35,30,25,20,20,20};
+	// //const USHORT #iTiro[11] = {70,60,50,45,40,35,30,25,20,20,20};
+	// //
+	// #setPoint := 0;
+	// #DIV_P := 200;     //Divisore per comp.proporzionale
+	// #DIV_I := 1000;    //Divisore per comp.integrale
+	// #OFFSET_CELLA_DINT := INT_TO_DINT(#Offset_cella);
+	// //Valori moltiplicativi per proporzionale + integrativo (da vettori)
+	// #t:=#Tiro/10;
+	// #PID.vParP := "DB215_ProgramData".pTiro[#t];
+	// #PID.vParI := "DB215_ProgramData".iTiro[#t];
+	// //SET-POINT
+	// #setPoint := (#Tiro * "DB230_Parameters".P_DELTA / 10);
+	// #setPoint := #setPoint + "DB230_Parameters".P_TIROMIN;
+	// //
+	// #PID.setPointShow := DINT_TO_UINT(#setPoint + #OFFSET_CELLA_DINT);
+	// //    
+	// IF (#PID.svuota) THEN
+	//     #PID.integrativo := 0;
+	//     #PID.svuota := FALSE;
+	// END_IF;
+	// //
+	// //Cella di carico
+	// "CELLA" := "MB_REGISTERS".ADDR_08_RD.REG_0;
+	// #CELLA_DINT := INT_TO_DINT("CELLA");
+	// #CELLA_DINT := #CELLA_DINT - #OFFSET_CELLA_DINT;
+	// //
+	// //ERRORE: CELLA (feedback) - SETPOINT
+	// #errore := ((#CELLA_DINT * UINT_TO_DINT("DB230_Parameters".P_GAIN)) / 100) - #setPoint;
+	// //
+	// //Gestione componente PROPORZIONALE
+	// //
+	// IF (#PID.vParP <> 0) THEN
+	//     #PID.proporzionale := (#errore * #PID.vParP) / #DIV_P;
+	//     IF (#PID.proporzionale < 0) THEN
+	//         #PID.proporzionale := 0;
+	//     END_IF;
+	//     IF (#PID.proporzionale > 1000) THEN
+	//         #PID.proporzionale := 1000;
+	//     END_IF;
+	// ELSE
+	//     #PID.proporzionale := 0;
+	// END_IF;
+	// //
+	// #PID.segnale := #PID.proporzionale;
+	// //
+	// //Gestione componente INTEGRALE
+	// //
+	// IF (#PID.vParI <> 0) THEN
+	//     #errore := (#errore * #PID.vParI) / #DIV_I;
+	//     #PID.integrativo := #PID.integrativo + #errore;
+	// //    
+	//     #PID.integrativo := #PID.integrativo * 998 / 1000; // Rotary 995 (con cella di carico in alto 990)
+	// //
+	//     IF (#PID.integrativo < 0) THEN
+	//         #PID.integrativo := 0;
+	//     END_IF;
+	//     IF (#PID.integrativo > 1000) THEN
+	//         #PID.integrativo := 1000;
+	//     END_IF;
+	// ELSE
+	//     #PID.integrativo := 0;
+	// END_IF;
+	// //Segnale complessivo "PID"
+	// #PID.segnale := #PID.segnale + #PID.integrativo;
+	// //Errore
+	// "ERR" := #errore;
+	// //
+	// //rotary
+	//const USHORT #pTiro[11] = {140,120,100,90,80,70,60,50,40,30,20};
+	//const USHORT #iTiro[11] = {140,120,100,90,80,70,60,50,40,30,20};
+	//ROTOTECH3000
+	//const USHORT #pTiro[11] = {70,60,50,45,40,35,30,25,20,20,20};
+	//const USHORT #iTiro[11] = {70,60,50,45,40,35,30,25,20,20,20};
+	//
+	//
+	#setPoint := 0;
+	#DIV_P := 200;     //Divisore per comp.proporzionale
+	#DIV_I := 1000;    //Divisore per comp.integrale
+	#OFFSET_CELLA_DINT := INT_TO_DINT(#Offset_cella);
+	//Valori moltiplicativi per proporzionale + integrativo (da vettori)
+	#t := #Tiro / 10;
+	#PID.vParP := "DB215_ProgramData".pTiro[#t];
+	#PID.vParI := "DB215_ProgramData".iTiro[#t];
+	//SET-POINT
+	//#setPoint := (#Tiro * "DB230_Parameters".P_DELTA / 10) + "DB230_Parameters".P_TIROMIN + #OFFSET_CELLA_DINT;
+	//
+	#setPoint := (#Tiro * INT_TO_DINT("DB215_ProgramData".MLC_HeightPulses) / 10) + INT_TO_DINT("DB215_ProgramData".MLC_Rounds) + #OFFSET_CELLA_DINT;
+	//
+	//
+	#PID.setPointShow := DINT_TO_UINT(#setPoint);
+	//    
+	IF (#PID.svuota) THEN
+	    #PID.integrativo := 0;
+	    #PID.svuota := FALSE;
+	END_IF;
+	//
+	//Cella di carico
+	//"CELLA" := "MB_REGISTERS".ADDR_08_RD.REG_0;
+	#CELLA_DINT := INT_TO_DINT("CELLA");
+	//#CELLA_DINT := #CELLA_DINT - #OFFSET_CELLA_DINT;
+	//
+	//ERRORE: CELLA (feedback) - SETPOINT
+	//#errore := ((#CELLA_DINT * UINT_TO_DINT("DB230_Parameters".P_GAIN)) / 100) - #setPoint;
+	#errore := #CELLA_DINT - #setPoint;
+	//
+	//Gestione componente PROPORZIONALE
+	//
+	IF (#PID.vParP <> 0) THEN
+	    #PID.proporzionale := (#errore * #PID.vParP) / #DIV_P;
+	    IF (#PID.proporzionale < 0) THEN
+	        #PID.proporzionale := 0;
+	    END_IF;
+	    IF (#PID.proporzionale > 1000) THEN
+	        #PID.proporzionale := 1000;
+	    END_IF;
+	ELSE
+	    #PID.proporzionale := 0;
+	END_IF;
+	//
+	#PID.segnale := #PID.proporzionale;
+	//
+	//Gestione componente INTEGRALE
+	//
+	IF (#PID.vParI <> 0) THEN
+	    #errore := (#errore * #PID.vParI) / #DIV_I;
+	    #PID.integrativo := #PID.integrativo + #errore;
+	    //    
+	    #PID.integrativo := #PID.integrativo * 990 / 1000; // Rotary 995 (con cella di carico in alto 990)
+	    //
+	    IF (#PID.integrativo < 0) THEN
+	        #PID.integrativo := 0;
+	    END_IF;
+	    IF (#PID.integrativo > 1000) THEN
+	        #PID.integrativo := 1000;
+	    END_IF;
+	ELSE
+	    #PID.integrativo := 0;
+	END_IF;
+	//Segnale complessivo "PID"
+	#PID.segnale := #PID.segnale + #PID.integrativo;
+	//Errore
+	"ERR" := #errore;
+	//
+	(**)
+	
+END_FUNCTION
+

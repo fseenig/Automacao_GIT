@@ -1,0 +1,418 @@
+﻿FUNCTION "FC33_Auxiliary_Memories" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.0
+   VAR_TEMP 
+      p_carr : DInt;
+      TempDInt : DInt;
+      TempDInt2 : DInt;
+      TempDInt_MLC : DInt;
+   END_VAR
+
+
+BEGIN
+	//Auxiliary memories pt.2
+	//***********************
+	(*
+	//
+	//CONDIZIONI PER EMERGENZA MACCHINA
+	"EmergencyCondition" := (NOT "Main_EMG") OR
+	                        (NOT "Thermic") OR  //EmergencyCode = 62
+	                        "Alarm2" OR
+	                        "Bumper";
+	//
+	*)
+	//GESTIONE MALFUNZIONAMENTI INVERTER
+	//FAULT (anomalia)
+	 IF ("Inverter_Data".U201.actual_fault = 16#0000) AND
+	    ("Inverter_Data".U221.actual_fault = 16#0000) AND
+	    ("Inverter_Data".U241.actual_fault = 16#0000) AND
+	    ("Inverter_Data".U261.actual_fault = 16#0000) AND
+	    ("Inverter_Data".U321.actual_fault = 16#0000) THEN
+	//    
+	    "InverterFault" := 0;
+	    "InverterFail" := 0;
+	ELSE
+	    "InverterFault" := 1;
+	END_IF;
+	//ALARM (avviso)
+	IF  ("Inverter_Data".U201.actual_alarm = 16#0000) AND
+	    ("Inverter_Data".U221.actual_alarm = 16#0000) AND
+	    ("Inverter_Data".U241.actual_alarm = 16#0000) AND
+	    ("Inverter_Data".U261.actual_alarm = 16#0000) AND
+	    ("Inverter_Data".U321.actual_alarm = 16#0000) THEN
+	    //    
+	    "InverterAlarm" := 0;
+	ELSE    //copio il codice avviso (per poi visualizzarlo su HMI se persiste)
+	    "Inverter_Alarms".U201_alarm := "Inverter_Data".U201.actual_alarm;
+	    "Inverter_Alarms".U221_alarm := "Inverter_Data".U221.actual_alarm;
+	    "Inverter_Alarms".U241_alarm := "Inverter_Data".U241.actual_alarm;
+	    "Inverter_Alarms".U261_alarm := "Inverter_Data".U261.actual_alarm;
+	    "Inverter_Alarms".U321_alarm := "Inverter_Data".U321.actual_alarm;
+	//    
+	    "InverterAlarm" := 1;
+	END_IF;
+	//
+	IF "Reset" THEN
+	    "Inverter_Alarms".U201_alarm := 0;
+	    "Inverter_Alarms".U221_alarm := 0;
+	    "Inverter_Alarms".U241_alarm := 0;
+	    "Inverter_Alarms".U261_alarm := 0;
+	    "Inverter_Alarms".U321_alarm := 0;
+	END_IF;
+	//
+	//Nel caso di "avvisi" attivo l'allarme solo se persistono per 5 secondi
+	//
+	IF ("InverterFault" OR "Timer".T200.Q) THEN
+	    "InverterFail" := 1;
+	    "DB23_AlarmProgram".dbx0_4 := 1;
+	END_IF;
+	//RESET (ACK)
+	IF "Timer".T4.Q  THEN
+	    "U201_Ack" := 1;
+	    "U221_Ack" := 1;
+	    "U241_Ack" := 1;
+	    "U261_Ack" := 1;
+	    "U321_Ack" := 1;
+	ELSE
+	    "U201_Ack" := 0;
+	    "U221_Ack" := 0;
+	    "U241_Ack" := 0;
+	    "U261_Ack" := 0;
+	    "U321_Ack" := 0;
+	END_IF;
+	//
+	//GESTIONE CELLA DI CARICO
+	//************************
+	(**)
+	"CELLA" := "MB_REG1".A08R.REG_0; //(FC320_PID)
+	//"CELLA" := 450; //(FC320_PID)
+	//Reset cella
+	IF "ResetLoadCell" THEN
+	    "DB215_ProgramData".Offset_cella := "CELLA" + "DB215_ProgramData".ValOffsetCella;
+	END_IF;
+	//
+	//APPOGGIO PER GRAFICO PID
+	//*****
+	//ROSA
+	"DB100_Display".CELLA := ("CELLA" - 100) / 8;  //cella carico
+	//ROSSO
+	"DB100_Display".SETPOINT := ("DB320_PID".PID.setPointShow - 100) / 8;  //sp calcolato (cella)
+	//VERDE
+	"DB100_Display".PROP := (1 * DINT_TO_INT("DB320_PID".PID.proporzionale)) / 2;  //proporzionale
+	//GIALLO
+	"DB100_Display"."INT" := (1 * DINT_TO_INT("DB320_PID".PID.integrativo)) / 3;  //integrale
+	//
+	//AZZURRO
+	"DB100_Display".FREQ_TIRO := (REAL_TO_INT("Inverter_Data".U241.setpoint)) / 30;  //integrale
+	//AZZURRO
+	"DB100_Display".FREQ_PRES := (REAL_TO_INT("Inverter_Data".U261.setpoint)) / 30;  //integrale
+	//
+	(*
+	//
+	//MOTORIZZAZIONI
+	//Passi carrello + rotazione
+	IF "DB230_Parameters".MotorType THEN
+	    //SEW
+	    "DB20_DisplaySysdata".dbd0 := 3730; 
+	    "DB20_DisplaySysdata".dbd80 := 3180;
+	ELSE //STD
+	    "DB20_DisplaySysdata".dbd0 := 3330;
+	    "DB20_DisplaySysdata".dbd80 := 7230; //enc.non integrato (P1)
+	END_IF;
+	//
+	//Costanti per proporzioni velocità 
+	"DB215_ProgramData".PropArmMax := 1770; //braccio@15rpm
+	"DB215_ProgramData".PropCarrMax := 1933; //carrello@7.2m/min=120mm/s
+	//
+	//GESTIONE BRACCIO
+	//****************
+	//Zona sicurezza braccio (fuori ingombro)
+	//
+	IF "DB09_ArmPos".dbw34 > 3200 OR "DB09_ArmPos".dbw34 < 460 THEN
+	    "SafetyPhase" := 1;
+	ELSE
+	    "SafetyPhase" := 0;
+	END_IF;
+	//
+	//FASE DI TAGLIO
+	//IF "DB09_ArmPos".dbw34 > 350 AND "DB09_ArmPos".dbw34 < 380 THEN
+	IF ("DB09_ArmPos".dbw34 > ("DB230_Parameters".Cut_Phase - "DB20_DisplaySysdata".dbw84)) AND
+	   ("DB09_ArmPos".dbw34 < ("DB230_Parameters".Cut_Phase + "DB20_DisplaySysdata".dbw84)) THEN
+	    "CutPhase" := 1;
+	ELSE
+	    "CutPhase" := 0;
+	END_IF;
+	//
+	//Velocità rotazione
+	"DB215_ProgramData".RotSpeed := USINT_TO_INT("DB216_ActiveRecipe".Recipe.RotSpeed) * "DB215_ProgramData".PropArmMax / 15;
+	//
+	//Calcoli per decelerazione
+	//Durata di un giro in ms in base alla velocità (60.000 msec / velocità in rpm)
+	(*
+	IF NOT "DB215_ProgramData".ActiveRecipeMLC THEN
+	    "DB215_ProgramData".RoundTime := 60000 / USINT_TO_UINT("DB216_ActiveRecipe".Recipe.RotSpeed);
+	ELSE
+	    "DB215_ProgramData".RoundTime := 60000 / USINT_TO_UINT("DB216_ActiveRecipe".Recipe.MLC_L9.RotSpeed);
+	END_IF;
+	*)
+	"DIAGNOSTICA".int_19 := INT_TO_UINT("DIAGNOSTICA".int_09);
+	"DB215_ProgramData".RoundTime := 6000 / "DIAGNOSTICA".int_19; //decimi
+	//Aumento il tempo in cui iniziare la decelerazione al diminuire della velocità (ci mette meno a fermarsi)
+	//
+	(*
+	IF NOT "DB215_ProgramData".ActiveRecipeMLC THEN
+	    #TempDInt := 125 - 5 * "DB216_ActiveRecipe".Recipe.RotSpeed; //(% di tempo giro) [(50:90) per (15:7)rpm]
+	ELSE
+	    #TempDInt := 125 - 5 * "DB216_ActiveRecipe".Recipe.MLC_L9.RotSpeed; //(% di tempo giro) [(50:90) per (15:7)rpm]
+	END_IF;
+	*)
+	#TempDInt := 1250 - 5 * ("DIAGNOSTICA".int_19); //(% di tempo giro) [(50:90) per (15:7)rpm]
+	#TempDInt2 := 60000 / "DIAGNOSTICA".int_19;//"DB215_ProgramData".RoundTime;    //T_giro
+	"DB215_ProgramData".LastRoundTime := DINT_TO_UINT((#TempDInt * #TempDInt2) / 100);  //millisec
+	//
+	//GESTIONE CARRELLO
+	//*****************
+	//Direzione conteggio
+	IF "FlagCarUp" THEN
+	    "DB215_ProgramData".EncCarrDir := 1; //direzione conteggio UP
+	ELSE
+	    "DB215_ProgramData".EncCarrDir := -1; //direzione conteggio DOWN
+	END_IF;
+	//
+	//Velocità salita/discesa
+	#TempDInt := USINT_TO_DINT("DB216_ActiveRecipe".Recipe.CarSpeedUp) * "DB215_ProgramData".PropCarrMax / 72;
+	"DB215_ProgramData".CarSpeedUp := DINT_TO_INT(#TempDInt);
+	//
+	#TempDInt := USINT_TO_DINT("DB216_ActiveRecipe".Recipe.CarSpeedDw) * "DB215_ProgramData".PropCarrMax / 72;
+	"DB215_ProgramData".CarSpeedDw := DINT_TO_INT(#TempDInt);
+	//
+	//POSIZIONAMENTI CARRELLO
+	//Passo [mm/1000p]
+	#p_carr := "DB20_DisplaySysdata".dbd0;
+	//
+	//Altimetro
+	#TempDInt := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.Altimeter - 50) * 10000;
+	"DB215_ProgramData".Altimeter_Pulses := DINT_TO_INT(#TempDInt / #p_carr);
+	//
+	//Ritardo fotocellula [ciclo STD; per MLC vedi FC33]
+	//(se ho attivo il pressore considero lo spessore di circa 8 cm in meno del piatto)
+	IF "DB216_ActiveRecipe".Recipe.PresserEnable THEN
+	    IF "DB216_ActiveRecipe".Recipe.PhotDelay >= 8 THEN
+	        #TempDInt := USINT_TO_DINT("DB216_ActiveRecipe".Recipe.PhotDelay - 8) * 10000;
+	    ELSE
+	        #TempDInt := USINT_TO_DINT("DB216_ActiveRecipe".Recipe.PhotDelay) * 10000;
+	    END_IF;
+	ELSE
+	    #TempDInt := USINT_TO_DINT("DB216_ActiveRecipe".Recipe.PhotDelay) * 10000;
+	END_IF;
+	"DB215_ProgramData".PhotDelay_Pulses := DINT_TO_INT(#TempDInt / #p_carr);
+	//
+	//Giri rinforzo
+	#TempDInt := USINT_TO_DINT("DB216_ActiveRecipe".Recipe.ReinforceHeight) * 10000;
+	"DB215_ProgramData".Reinforce_Pulses := DINT_TO_INT(#TempDInt / #p_carr);
+	//Discesa carrello per top
+	#TempDInt := INT_TO_DINT("DB230_Parameters".TopCarrDescent) * 10000;
+	"DB215_ProgramData".TopFall_Pulses := DINT_TO_INT(#TempDInt / #p_carr);
+	//MLC
+	//Forzamento a zero dell'ultimo strato (sempre in basso)
+	"DB216_ActiveRecipe".Recipe.MLC_L9.Height := 0;
+	//
+	//Altezza strati (in base allo step del ciclo MLC) - Carica dati dello strato successivo
+	IF "DB215_ProgramData".ActiveRecipeMLC THEN
+	    CASE "DB200_Supervisor".State_Auto OF
+	        15:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L1.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//-----------------------------------------------------------------------------------------------            
+	        212:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L2.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//-----------------------------------------------------------------------------------------------            
+	        220:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L2.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	        222:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L3.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//-----------------------------------------------------------------------------------------------             
+	        230:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L3.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	        232:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L4.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//----------------------------------------------------------------------------------------------- 
+	        240:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L4.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	        242:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L5.Height - 50) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//-----------------------------------------------------------------------------------------------     
+	        255:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L6.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//-----------------------------------------------------------------------------------------------    
+	        260:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L6.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	        262:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L7.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//-----------------------------------------------------------------------------------------------
+	        270:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L7.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	        272:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L8.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	//-----------------------------------------------------------------------------------------------
+	        280:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L8.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	        282:
+	            #TempDInt_MLC := UINT_TO_DINT("DB216_ActiveRecipe".Recipe.MLC_L9.Height) * 10000;
+	            "DB215_ProgramData".MLC_HeightPulses := DINT_TO_INT(#TempDInt_MLC / #p_carr);
+	    END_CASE;
+	   //
+	END_IF;
+	//
+	//Lettura posizione carrello
+	"DIAGNOSTICA".dint_01 := ("Enc_Carr" * #p_carr) / 10000;
+	//
+	//GESTIONE CICLO AUTOMATICO
+	//*************************
+	"ActiveCycle" := ("DB200_Supervisor".State_Auto >= 10); // <> 0);
+	//
+	//RESET CICLO (PULSANTE HMI) - SOLO MACCHINA
+	"DB100_Display".CycleResetEnable := ("DB200_Supervisor".State_Stop = 170 AND
+	(NOT "CutPhase" OR NOT "CarriageDown" //OR
+	//(LPAS_enable AND NOT "CutArmBack")
+	OR "ActiveCycle"));
+	//
+	//RESET CICLO MACCHINA
+	IF "Reset" AND "Stop_state" THEN
+	    "DB200_Supervisor".State_Auto := 0;
+	END_IF;
+	//
+	//TIPO CICLO (con/senza top per Rototech3000)
+	//
+	IF "DB216_ActiveRecipe".Recipe.Cycle >= 3 THEN
+	    "DB216_ActiveRecipe".Recipe.Cycle := 0;
+	END_IF;
+	//Con MLC non ha senso parlare di ciclo economico (solo waterproof)
+	IF "DB215_ProgramData".ActiveRecipeMLC THEN
+	    IF "DB216_ActiveRecipe".Recipe.Cycle >= 2 THEN
+	        "DB216_ActiveRecipe".Recipe.Cycle := 0;
+	    END_IF;
+	END_IF;
+	//No top
+	IF "DB216_ActiveRecipe".Recipe.Cycle = 0 THEN
+	    "DB03_Machine".TopBefore := 0;
+	    "DB03_Machine".TopWaterP := 0;
+	END_IF;
+	//Top waterproof
+	IF "DB216_ActiveRecipe".Recipe.Cycle = 1 THEN
+	    "DB03_Machine".TopBefore := 0;
+	    "DB03_Machine".TopWaterP := 1;
+	END_IF;
+	//Top dustproof (top before)
+	IF "DB216_ActiveRecipe".Recipe.Cycle = 2 THEN
+	    "DB03_Machine".TopBefore := 1;
+	    "DB03_Machine".TopWaterP := 0;
+	END_IF;
+	//
+	//RICETTE
+	//Confronto ricette su HMI (modificabile) e PLC (salvata)
+	IF (%DB216.DBD0 <> %DB229.DBD0 OR
+	    %DB216.DBD4 <> %DB229.DBD4 OR
+	    %DB216.DBD8 <> %DB229.DBD8 OR
+	    %DB216.DBD12 <> %DB229.DBD12 OR
+	    %DB216.DBD16 <> %DB229.DBD16 OR
+	    %DB216.DBD20 <> %DB229.DBD20 OR
+	    %DB216.DBD24 <> %DB229.DBD24 OR
+	    %DB216.DBD28 <> %DB229.DBD28 OR
+	    %DB216.DBD32 <> %DB229.DBD32 OR
+	    %DB216.DBD36 <> %DB229.DBD36 OR
+	    %DB216.DBD40 <> %DB229.DBD40 OR
+	    %DB216.DBD44 <> %DB229.DBD44 OR
+	    %DB216.DBD48 <> %DB229.DBD48 OR
+	    %DB216.DBD52 <> %DB229.DBD52 OR
+	    %DB216.DBD56 <> %DB229.DBD56 OR
+	    %DB216.DBD60 <> %DB229.DBD60 OR
+	    %DB216.DBD64 <> %DB229.DBD64 OR
+	    %DB216.DBD68 <> %DB229.DBD68 OR
+	    %DB216.DBD72 <> %DB229.DBD72 OR
+	    %DB216.DBD76 <> %DB229.DBD76 OR
+	    %DB216.DBD80 <> %DB229.DBD80 OR
+	    %DB216.DBD84 <> %DB229.DBD84 OR
+	    %DB216.DBD88 <> %DB229.DBD88 OR
+	    %DB216.DBD92 <> %DB229.DBD92 OR
+	    %DB216.DBD96 <> %DB229.DBD96 OR
+	    %DB216.DBD100 <> %DB229.DBD100 OR
+	    %DB216.DBD104 <> %DB229.DBD104 OR
+	    %DB216.DBD108 <> %DB229.DBD108 OR
+	    %DB216.DBD112 <> %DB229.DBD112 OR
+	    %DB216.DBD116 <> %DB229.DBD116 OR
+	    %DB216.DBD120 <> %DB229.DBD120 OR
+	    %DB216.DBD124 <> %DB229.DBD124 OR
+	    %DB216.DBD128 <> %DB229.DBD128 OR
+	    %DB216.DBD132 <> %DB229.DBD132 OR
+	    %DB216.DBD136 <> %DB229.DBD136 OR
+	    %DB216.DBD140 <> %DB229.DBD140 OR
+	    %DB216.DBD144 <> %DB229.DBD144 OR
+	    %DB216.DBD148 <> %DB229.DBD148 OR
+	    %DB216.DBD152 <> %DB229.DBD152 OR
+	    %DB216.DBD156 <> %DB229.DBD156)
+	THEN
+	    "DB215_ProgramData".RecipeModified := 1;
+	ELSE
+	    "DB215_ProgramData".RecipeModified := 0;
+	END_IF;
+	//******************************************
+	//LIMITI
+	//Tiro
+	IF ("DB216_ActiveRecipe".Recipe.StretchDwRounds < 0) THEN
+	    "DB216_ActiveRecipe".Recipe.StretchDwRounds := 0;
+	ELSIF ("DB216_ActiveRecipe".Recipe.StretchDwRounds > 100) THEN
+	    "DB216_ActiveRecipe".Recipe.StretchDwRounds := 100;
+	END_IF;
+	//Forzamento del valore di tiro giri bassi su altri valori
+	IF NOT "DB100_Display".TiroMultipleVal THEN
+	    IF "DB216_ActiveRecipe".Recipe.StretchDwRounds <> "DB216_ActiveRecipe".Recipe.StretchUpward THEN
+	        "DB216_ActiveRecipe".Recipe.StretchUpward := "DB216_ActiveRecipe".Recipe.StretchDwRounds;
+	    END_IF;
+	    IF "DB216_ActiveRecipe".Recipe.StretchDwRounds <> "DB216_ActiveRecipe".Recipe.StretchUpRounds THEN
+	        "DB216_ActiveRecipe".Recipe.StretchUpRounds := "DB216_ActiveRecipe".Recipe.StretchDwRounds;
+	    END_IF;
+	    IF "DB216_ActiveRecipe".Recipe.StretchDwRounds <> "DB216_ActiveRecipe".Recipe.StretchDownward THEN
+	        "DB216_ActiveRecipe".Recipe.StretchDownward := "DB216_ActiveRecipe".Recipe.StretchDwRounds;
+	    END_IF;
+	END_IF;
+	//Prestiro
+	IF ("DB216_ActiveRecipe".Recipe.Prestretch < 150) THEN
+	    "DB216_ActiveRecipe".Recipe.Prestretch := 150;
+	ELSIF ("DB216_ActiveRecipe".Recipe.Prestretch > 400) THEN
+	    "DB216_ActiveRecipe".Recipe.Prestretch := 400;
+	END_IF;
+	// Velocità braccio
+	IF ("DB216_ActiveRecipe".Recipe.RotSpeed < 7) THEN
+	    "DB216_ActiveRecipe".Recipe.RotSpeed := 7;
+	ELSIF ("DB216_ActiveRecipe".Recipe.RotSpeed > 15) THEN
+	    "DB216_ActiveRecipe".Recipe.RotSpeed := 15;
+	END_IF;
+	// Velocità carrello
+	IF ("DB216_ActiveRecipe".Recipe.CarSpeedUp < 25) THEN
+	    "DB216_ActiveRecipe".Recipe.CarSpeedUp := 25;
+	ELSIF ("DB216_ActiveRecipe".Recipe.CarSpeedUp > 72) THEN
+	    "DB216_ActiveRecipe".Recipe.CarSpeedUp := 72;
+	END_IF;
+	IF ("DB216_ActiveRecipe".Recipe.CarSpeedDw < 25) THEN
+	    "DB216_ActiveRecipe".Recipe.CarSpeedDw := 25;
+	ELSIF ("DB216_ActiveRecipe".Recipe.CarSpeedDw > 72) THEN
+	    "DB216_ActiveRecipe".Recipe.CarSpeedDw := 72;
+	END_IF;
+	//******************************************
+	*)
+END_FUNCTION
+
