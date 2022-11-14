@@ -1,0 +1,25 @@
+﻿FUNCTION "FC100_BlockMoveIdexed" : Void
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+   VAR_INPUT 
+      DBSource : Int;
+      ByteSource : Int;
+      DBDestination : Int;
+      ByteDestination : Int;
+      ByteNumber : Int;
+   END_VAR
+
+
+BEGIN
+	POKE_BLK (area_src:=16#84,
+	          dbNumber_src:=#DBSource,
+	          byteOffset_src:=#ByteSource,
+	          area_dest:=16#84,
+	          dbNumber_dest:=#DBDestination,
+	          byteOffset_dest:=#ByteDestination,
+	          count:=#ByteNumber);
+	
+	
+	
+END_FUNCTION
+
