@@ -2,24 +2,36 @@
 <Document>
   <Engineering version="V16" />
   <DocumentInfo>
-    <Created>2022-11-14T17:35:51.535928Z</Created>
+    <Created>2022-11-17T09:54:46.579992Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
     <InstalledProducts>
       <Product>
         <DisplayName>Totally Integrated Automation Portal</DisplayName>
-        <DisplayVersion>V16</DisplayVersion>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
       </Product>
       <OptionPackage>
         <DisplayName>TIA Portal Version Control Interface</DisplayName>
-        <DisplayVersion>V16</DisplayVersion>
+        <DisplayVersion>V16 Update 2</DisplayVersion>
       </OptionPackage>
       <OptionPackage>
         <DisplayName>TIA Portal Openness</DisplayName>
-        <DisplayVersion>V16</DisplayVersion>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
       </OptionPackage>
       <Product>
         <DisplayName>STEP 7 Professional</DisplayName>
-        <DisplayVersion>V16</DisplayVersion>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
       </Product>
       <OptionPackage>
         <DisplayName>STEP 7 Safety</DisplayName>
@@ -27,7 +39,7 @@
       </OptionPackage>
       <Product>
         <DisplayName>WinCC Advanced</DisplayName>
-        <DisplayVersion>V16</DisplayVersion>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
       </Product>
     </InstalledProducts>
   </DocumentInfo>
@@ -18538,6 +18550,118 @@
                 <AttributeList>
                   <Culture>it-IT</Culture>
                   <Text>Memory to exclude wrapping in pos 5</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="A55" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Bool</DataTypeName>
+          <ExternalAccessible>true</ExternalAccessible>
+          <ExternalVisible>true</ExternalVisible>
+          <ExternalWritable>true</ExternalWritable>
+          <LogicalAddress>%I8.0</LogicalAddress>
+          <Name>Centrador_Aberto/Fechado_1</Name>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="A56" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="A57" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A58" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="A59" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Bool</DataTypeName>
+          <ExternalAccessible>true</ExternalAccessible>
+          <ExternalVisible>true</ExternalVisible>
+          <ExternalWritable>true</ExternalWritable>
+          <LogicalAddress>%I8.1</LogicalAddress>
+          <Name>Centrador_Aberto/Fechado_2</Name>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="A5A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="A5B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A5C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="A5D" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Bool</DataTypeName>
+          <ExternalAccessible>true</ExternalAccessible>
+          <ExternalVisible>true</ExternalVisible>
+          <ExternalWritable>true</ExternalWritable>
+          <LogicalAddress>%I8.2</LogicalAddress>
+          <Name>Palete_Centrada_1</Name>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="A5E" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="A5F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A60" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Tags.PlcTag>
+      <SW.Tags.PlcTag ID="A61" CompositionName="Tags">
+        <AttributeList>
+          <DataTypeName>Bool</DataTypeName>
+          <ExternalAccessible>true</ExternalAccessible>
+          <ExternalVisible>true</ExternalVisible>
+          <ExternalWritable>true</ExternalWritable>
+          <LogicalAddress>%I8.3</LogicalAddress>
+          <Name>Palete_Centrada_2</Name>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="A62" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="A63" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A64" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
                 </AttributeList>
               </MultilingualTextItem>
             </ObjectList>
