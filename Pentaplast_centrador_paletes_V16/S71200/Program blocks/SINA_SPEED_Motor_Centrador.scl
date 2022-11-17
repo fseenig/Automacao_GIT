@@ -1,0 +1,264 @@
+﻿FUNCTION_BLOCK "SINA_SPEED_Motor_Centrador"
+TITLE = 'Speed Control with SINAMICS and S7'
+{ S7_Optimized_Access := 'TRUE' }
+AUTHOR : DRVDPS7
+FAMILY : DRIVES
+NAME : SINA_SPD
+VERSION : 5.1
+//Copyright (C) Siemens AG 2012. All Rights Reserved. Confidential
+//-------------------------------------------------------------------------------------- 
+//SINA_SPEED: Drehzahlregelung mit dem Antriebsbaustein SINAMICS S120/G120 <-> S7-1200
+//------------------------------------------------------------------------------------- Ersteller: Siemens AG Erlangen A&D MC PM   Datum:  07.07.10        Vers.:2.1
+//Änderung:  J.B. Typical Team                       07.12.12              2.2
+//    Umsetzung in SCL / TIA 
+//Änderung:  J.B. Typical Team                       29.04.13              2.3
+//    1. "Q" an den AusgÃ¤nge entfernen
+//    2. Neuer Ausgang PwrInhibit
+//Änderung:  J.B. Typical Team                       28.06.13              2.4
+//    Ã„nderung HW-Zugriff Ã¼ber LOG2MOD
+//     
+//Änderung:  J.B. Typical Team                       18.07.13              2.5
+//    Ã„nderung HW-Zugriff Ã¼ber zwei HW-EingÃ¤nge
+//
+//Änderung:  J.B. Typical Team                       17.07.14              3.0
+//    Optimmierung
+//
+//Änderung:  J.B. Typical Team                       30.07.14              4.0
+//    Festlegung auf einheitlicher neuer Version 4.0
+//
+//Änderung:  P.Z. Typical Team                       03.12.15              4.1
+//    Schnittstelle an Programmierleitfadeb TIA-Potal angepasst
+//    zusÃ¤tzlicher Eingang "ConfigAxis" fÃ¼r STW-Bits
+//
+//Änderung:  G.F. Typical Team                       01.03.16              4.2
+//    Sollwert auf INT - Grenzen begrenzt
+//Änderung:  F.G. Typical Team                       13.09.16              4.3
+//    Ausgabewerte am Ausgang "Status" angepasst 
+//
+//Änderung:  G.F. Typical Team                       11.01.17              5.0
+//    - Festlegung auf einheitlicher neuer Version 5.0 
+//
+//Änderung:  G.F. Typical Team                       03.05.18              5.1
+//    - Alle Bits des Eingang ConfigAxis auf STW1 aufgelegt 
+//
+//Bibliothek V7
+//Funktion: Drehzahlregelung mit dem Antriebsbaustein SINAMICS S120/G120 <-> S7-1200
+//********************************************************************************************************************************************************
+//************************************************************************FB283***************************************************************************
+//********************************************************************************************************************************************************
+   VAR_INPUT 
+      EnableAxis : Bool := 0;   // 0-->1; 1 = Enable the drive (OFF2 / OFF 3 are 1 in default status) (OFF1 = 0-->1)
+      AckError : Bool := 0;   // 1 = Acknowledge drive error
+      SpeedSp : Real := 0.0;   // Speed standardises with the standardisation factor
+      RefSpeed : Real := 0.0;   // Standardisation factor of speed
+      ConfigAxis : Word := 16#003F;   // binary programmed input to control all functions in the telegram without its own function block input
+      HWIDSTW : HW_IO := 0;   // Hardware Identifer set point slot
+      HWIDZSW : HW_IO := 0;   // Hardware Identifer actual value slot
+   END_VAR
+
+   VAR_OUTPUT 
+      AxisEnabled : Bool := 0;   // 1 = Drive is enabled
+      Lockout : Bool := 0;   // 1 = Drive lockout active
+      ActVelocity : Real := 0.0;   // Actual in [U/min]
+      Error : Bool := 0;   // 1 = Error  (FB and Infeed)
+      Status : Word := 0;   // Status output (7002 = FB in operation; 8xxx = error description  - read the manual)
+      DiagId : Word := 16#0000;   // Error codes of the cyclic system funtion blocks DPWR / DPRD_DAT
+   END_VAR
+
+   VAR 
+      sxSendBuf : Struct   // Send buffer
+         STW1 : Word := WORD#16#0000;   // STW1sxSTW1     : STRUCT            Bit08       : BOOL:=False;              // ST-Wort-1 Bit 08 --> Reserve            Bit09       : BOOL:=False;              // ST-Wort-1 Bit 09 --> Reserve            Bit10       : BOOL:=True;               // ST-Wort-1 Bit 10 --> FÃ¼hrung durch PLC            Dir         : BOOL:=False;              // ST-Wort-1 Bit 11 --> Direction            Bit12       : BOOL:=False;              // ST-Wort-1 Bit 12 --> Haltebremse unbedingt Ã¶ffnen            Bit13       : BOOL:=False;              // ST-Wort-1 Bit 13 --> Motorpotenziometer Sollwert hÃ¶her            Bit14       : BOOL:=False;              // ST-Wort-1 Bit 14 --> Motorpotenziometer Sollwert tiefer            Bit15       : BOOL:=False;              // ST-Wort-1 Bit 15 --> Reserviert            Off1        : BOOL:=False;              // ST-Wort-1 Bit 00 --> OFF1/ON (flanks acceptance)            Off2        : BOOL:=True;               // ST-Wort-1 Bit 01 --> OFF2/ON (enable possible)            Off3        : BOOL:=True;               // ST-Wort-1 Bit 02 --> OFF3/ON (enable possible)            InvEn       : BOOL:=True;               // ST-Wort-1 Bit 03 --> Enable controller            RampEn      : BOOL:=True;               // ST-Wort-1 Bit 04 --> Ramp enable            RampOn      : BOOL:=True;               // ST-Wort-1 Bit 05 --> Ramp On            SpEn        : BOOL:=True;               // ST-Wort-1 Bit 06 --> Speed set point enable            AckFlt      : BOOL:=False;              // ST-Wort-1 Bit 07 --> Acknowledge fault         END_STRUCT;
+         Velocity : Word := WORD#16#0000;   // Setpoint of velocity
+      END_STRUCT;
+      sxRecvBuf : Struct   // Receive buffer
+         ZSW1 : Word := WORD#16#0000;   // ZSW1sxZSW1     : STRUCT            SpDev       : BOOL:=False;              // ZSW-Wort-1 = Schleppfehler im Toleranzbereich            Pcd         : BOOL:=False;              // ZSW-Wort-1 = PZD-FÃ¼hrung erreicht            Comp        : BOOL:=False;              // ZSW-Wort-1 = Zielposition erreicht            CurLim      : BOOL:=False;              // ZSW-Wort-1 = Referenzpunkt gesetzt            Brake       : BOOL:=False;              // ZSW-Wort-1 = Haltebremse Ã¶ffnen            Motover     : BOOL:=False;              // ZSW-Wort-1 = keine Warnung Ãœbertemperatur Motor            Dir         : BOOL:=False;              // ZSW-Wort-1 = Direction            Invover     : BOOL:=False;              // ZSW-Wort-1 = keine Warnung thermische Ãœberlast Leistungsteil            Rts         : BOOL:=False;              // ZSW-Wort-1 = Ready to power up / to start            Rdy         : BOOL:=False;              // ZSW-Wort-1 = Ready to operate            IOp         : BOOL:=False;              // ZSW-Wort-1 = In operation (operation enabled)            Fault       : BOOL:=False;              // ZSW-Wort-1 = Fault present            NoOff2      : BOOL:=False;              // ZSW-Wort-1 = OFF2 inactive            NoOff3      : BOOL:=False;              // ZSW-Wort-1 = OFF3 inactive            Inhibit     : BOOL:=False;              // ZSW-Wort-1 = Power ON inhibit active             Alarm       : BOOL:=False;              // ZSW-Wort-1 = Alarm / Warning present                     END_STRUCT;
+         Velocity : Word := WORD#16#0000;   // Feedback of velocity
+      END_STRUCT;
+   END_VAR
+
+   VAR_TEMP 
+      piRetSFC : Int;   // Status for fault analysis
+      piCount : Int;   // Freely available counter variable 3
+      prVelocity : Real;   // velocity
+      pdRecvBuf : DWord;   // Buffer of Recv-Value
+      pdSendBuf : DWord;   // Buffer of Send-Value
+      phLAddr : HW_IO;   // Start addr from the I/O process image area of mod (DEC) for DPWR_DAT/DPRD_DAT
+      swSendBuf : Array[0..1] of Word;   // Sendepuffer
+      swRecvBuf : Array[0..1] of Word;   // Empfangspuffer         Static variables
+   END_VAR
+
+
+BEGIN
+	
+	//=============================================================================
+	//SIEMENS AG
+	//(c)Copyright 2017 All Rights Reserved
+	//-----------------------------------------------------------------------------
+	// Library: DriveLib
+	// Tested with: S7-1516-3 PN/DP V1.8
+	// Engineering: TIA Portal V14
+	// Restrictions: -
+	// Requirements: S7-1200 / S7-1500
+	// Functionality: cyclic communication between a SINAMICS a PLC.
+	//                If in HWConfig Std.TLG 1 is projected 2 PZD-words are exchanged
+	//                in every bus cycle.
+	//                The parametrisation of these words is described in the manual of the
+	//                SINAMICS
+	//=============================================================================
+	
+	// Schreibdaten zusammenstellen
+	// Steuerword aufbereiten
+	
+	#sxSendBuf.STW1.%X0 := #EnableAxis;
+	#sxSendBuf.STW1.%X1 := #ConfigAxis.%X0;
+	#sxSendBuf.STW1.%X2 := #ConfigAxis.%X1;
+	#sxSendBuf.STW1.%X3 := #ConfigAxis.%X2;
+	#sxSendBuf.STW1.%X4 := #ConfigAxis.%X3;
+	#sxSendBuf.STW1.%X5 := #ConfigAxis.%X4;
+	#sxSendBuf.STW1.%X6 := #ConfigAxis.%X5;
+	#sxSendBuf.STW1.%X7 := #AckError;
+	#sxSendBuf.STW1.%X8 := #ConfigAxis.%X10;
+	#sxSendBuf.STW1.%X9 := #ConfigAxis.%X11;
+	#sxSendBuf.STW1.%X10 := TRUE;
+	#sxSendBuf.STW1.%X11 := #ConfigAxis.%X6;
+	#sxSendBuf.STW1.%X12 := #ConfigAxis.%X7;
+	#sxSendBuf.STW1.%X13 := #ConfigAxis.%X8;
+	#sxSendBuf.STW1.%X14 := #ConfigAxis.%X9;
+	#sxSendBuf.STW1.%X15 := #ConfigAxis.%X12;
+	
+	// Geschwindigkeit
+	IF #RefSpeed <> 0 THEN
+	  #prVelocity := #SpeedSp * (16384.0 / #RefSpeed);
+	  // Limit REAL - Variable to INT - Limits
+	  IF #prVelocity > 32767 THEN
+	    #prVelocity := 32767;
+	  ELSIF #prVelocity < -32768 THEN
+	    #prVelocity := -32768;
+	  ELSE
+	    ; // not needed
+	  END_IF;
+	  #sxSendBuf.Velocity := INT_TO_WORD(REAL_TO_INT(#prVelocity));
+	  
+	ELSE
+	  #sxSendBuf.Velocity := W#16#0;
+	END_IF;
+	#swSendBuf[0] := #sxSendBuf.STW1;
+	#swSendBuf[1] := #sxSendBuf.Velocity;
+	
+	//Prozessdaten zur Signalbaugruppe schreiben
+	#piRetSFC := DPWR_DAT(LADDR := #HWIDSTW,
+	                      RECORD := #swSendBuf);
+	
+	// Fehler der RÃ¼ckmeldung ausgeben
+	#DiagId := INT_TO_WORD(#piRetSFC);
+	
+	//kein Fehler beim Schreiben
+	IF #piRetSFC = 0 THEN
+	  
+	  //kein Fehler beim Schreiben
+	  IF #piRetSFC = 0 THEN
+	    
+	    //Prozessdaten von der Signalbaugruppe lesen
+	    #piRetSFC := DPRD_DAT(LADDR := #HWIDZSW,
+	                          RECORD => #swRecvBuf);
+	    
+	    // Fehler der RÃ¼ckmeldung ausgeben
+	    #DiagId := INT_TO_WORD(#piRetSFC);
+	  END_IF;
+	  
+	  //Fehler beim Lesen (Profibus-Kommunikation unterbrochen)
+	  IF #piRetSFC <> 0 THEN
+	    
+	    // Fehler
+	    #Error := TRUE;
+	    #Status := 16#8600;
+	    
+	    // Zustandsworte lÃ¶schen
+	    #sxRecvBuf.ZSW1.%X8 := 0;
+	    #sxRecvBuf.ZSW1.%X9 := 0;
+	    #sxRecvBuf.ZSW1.%X10 := 0;
+	    #sxRecvBuf.ZSW1.%X11 := 0;
+	    #sxRecvBuf.ZSW1.%X12 := 0;
+	    #sxRecvBuf.ZSW1.%X13 := 0;
+	    #sxRecvBuf.ZSW1.%X14 := 0;
+	    #sxRecvBuf.ZSW1.%X15 := 0;
+	    #sxRecvBuf.ZSW1.%X0 := 0;
+	    #sxRecvBuf.ZSW1.%X1 := 0;
+	    #sxRecvBuf.ZSW1.%X2 := 0;
+	    #sxRecvBuf.ZSW1.%X3 := 0;
+	    #sxRecvBuf.ZSW1.%X4 := 0;
+	    #sxRecvBuf.ZSW1.%X5 := 0;
+	    #sxRecvBuf.ZSW1.%X6 := 0;
+	    #sxRecvBuf.ZSW1.%X7 := 0;
+	    
+	    
+	    (*#sxRecvBuf.sxZSW1.SpDev   := 0;
+	    #sxRecvBuf.sxZSW1.Pcd     := 0;
+	    #sxRecvBuf.sxZSW1.Comp    := 0;
+	    #sxRecvBuf.sxZSW1.CurLim  := 0;
+	    #sxRecvBuf.sxZSW1.Brake   := 0;
+	    #sxRecvBuf.sxZSW1.Motover := 0;
+	    #sxRecvBuf.sxZSW1.Dir     := 0;
+	    #sxRecvBuf.sxZSW1.Invover := 0;
+	    #sxRecvBuf.sxZSW1.Rts     := 0;
+	    #sxRecvBuf.sxZSW1.Rdy     := 0;
+	    #sxRecvBuf.sxZSW1.IOp     := 0;
+	    #sxRecvBuf.sxZSW1.Fault   := 0;
+	    #sxRecvBuf.sxZSW1.NoOff2  := 0;
+	    #sxRecvBuf.sxZSW1.NoOff3  := 0;
+	    #sxRecvBuf.sxZSW1.Inhibit := 0;
+	    #sxRecvBuf.sxZSW1.Alarm   := 0;*)
+	    
+	    #sxRecvBuf.Velocity := W#16#00;
+	    
+	    // Werte auslesen
+	  ELSE
+	    #sxRecvBuf.ZSW1 := #swRecvBuf[0];
+	    #sxRecvBuf.Velocity := #swRecvBuf[1];
+	    
+	    // ZSW1 aufbereiten                       
+	    #AxisEnabled := #sxRecvBuf.ZSW1.%X2;
+	    #Error := #sxRecvBuf.ZSW1.%X3 OR #sxRecvBuf.ZSW1.%X6;
+	    #Lockout := #sxRecvBuf.ZSW1.%X6;
+	    
+	    // Fehler auswerten
+	    IF #sxRecvBuf.ZSW1.%X3 THEN
+	      #Status := 16#8401;
+	    ELSIF #sxRecvBuf.ZSW1.%X6 THEN
+	      #Status := 16#8402;
+	    ELSE
+	      #Status := 16#7002;
+	    END_IF;
+	    
+	    (*#Busy       := #sxRecvBuf.sxZSW1.IOp;
+	    #Error      := #sxRecvBuf.sxZSW1.Fault OR #sxRecvBuf.sxZSW1.Inhibit;
+	    #PwrInhibit := #sxRecvBuf.sxZSW1.Inhibit;            
+	
+	    // Fehler auswerten
+	    IF #sxRecvBuf.sxZSW1.Fault THEN
+	        #ErrorId := 1;
+	    ELSIF #sxRecvBuf.sxZSW1.Inhibit THEN 
+	        #ErrorId := 2;
+	    ELSE
+	        #ErrorId := 0;    
+	    END_IF;*)
+	    
+	    // Geschwindigkeit
+	    IF #RefSpeed <> 0 THEN
+	      #ActVelocity := INT_TO_REAL(WORD_TO_INT(#sxRecvBuf.Velocity)) / (16384.0 / #RefSpeed);
+	    ELSE
+	      #ActVelocity := 0.0;
+	    END_IF;
+	  END_IF;
+	ELSE
+	  
+	  // Fehler
+	  #Error := TRUE;
+	  #Status := 16#8601;
+	  
+	END_IF;
+	
+	
+	
+END_FUNCTION_BLOCK
+
