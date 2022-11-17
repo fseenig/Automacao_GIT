@@ -2,7 +2,7 @@
 <Document>
   <Engineering version="V16" />
   <DocumentInfo>
-    <Created>2022-11-17T11:56:29.5480859Z</Created>
+    <Created>2022-11-17T15:34:21.9118065Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
     <InstalledProducts>
       <Product>
@@ -237,15 +237,9 @@
         <Component Name="RefSpeed" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalConstant" UId="24">
-      <Constant Name="Centrador~PROFINET_interface_centrador~SIEMENS_telegram_352" />
-    </Access>
-    <Access Scope="GlobalConstant" UId="25">
-      <Constant Name="Centrador~PROFINET_interface_centrador~SIEMENS_telegram_352" />
-    </Access>
-    <Call UId="26">
+    <Call UId="24">
       <CallInfo Name="SINA_SPEED_Motor_Centrador" BlockType="FB">
-        <Instance Scope="GlobalVariable" UId="27">
+        <Instance Scope="GlobalVariable" UId="25">
           <Component Name="SINA_SPEED_Motor_Centrador_DB" />
         </Instance>
         <Parameter Name="EnableAxis" Section="Input" Type="Bool" />
@@ -267,58 +261,58 @@
   <Wires>
     <Wire UId="36">
       <Powerrail />
-      <NameCon UId="26" Name="en" />
+      <NameCon UId="24" Name="en" />
     </Wire>
     <Wire UId="37">
       <IdentCon UId="21" />
-      <NameCon UId="26" Name="EnableAxis" />
+      <NameCon UId="24" Name="EnableAxis" />
     </Wire>
     <Wire UId="38">
-      <OpenCon UId="28" />
-      <NameCon UId="26" Name="AckError" />
+      <OpenCon UId="26" />
+      <NameCon UId="24" Name="AckError" />
     </Wire>
     <Wire UId="39">
       <IdentCon UId="22" />
-      <NameCon UId="26" Name="SpeedSp" />
+      <NameCon UId="24" Name="SpeedSp" />
     </Wire>
     <Wire UId="40">
       <IdentCon UId="23" />
-      <NameCon UId="26" Name="RefSpeed" />
+      <NameCon UId="24" Name="RefSpeed" />
     </Wire>
     <Wire UId="41">
-      <OpenCon UId="29" />
-      <NameCon UId="26" Name="ConfigAxis" />
+      <OpenCon UId="27" />
+      <NameCon UId="24" Name="ConfigAxis" />
     </Wire>
     <Wire UId="42">
-      <IdentCon UId="24" />
-      <NameCon UId="26" Name="HWIDSTW" />
+      <OpenCon UId="28" />
+      <NameCon UId="24" Name="HWIDSTW" />
     </Wire>
     <Wire UId="43">
-      <IdentCon UId="25" />
-      <NameCon UId="26" Name="HWIDZSW" />
+      <OpenCon UId="29" />
+      <NameCon UId="24" Name="HWIDZSW" />
     </Wire>
     <Wire UId="44">
-      <NameCon UId="26" Name="AxisEnabled" />
+      <NameCon UId="24" Name="AxisEnabled" />
       <OpenCon UId="30" />
     </Wire>
     <Wire UId="45">
-      <NameCon UId="26" Name="Lockout" />
+      <NameCon UId="24" Name="Lockout" />
       <OpenCon UId="31" />
     </Wire>
     <Wire UId="46">
-      <NameCon UId="26" Name="ActVelocity" />
+      <NameCon UId="24" Name="ActVelocity" />
       <OpenCon UId="32" />
     </Wire>
     <Wire UId="47">
-      <NameCon UId="26" Name="Error" />
+      <NameCon UId="24" Name="Error" />
       <OpenCon UId="33" />
     </Wire>
     <Wire UId="48">
-      <NameCon UId="26" Name="Status" />
+      <NameCon UId="24" Name="Status" />
       <OpenCon UId="34" />
     </Wire>
     <Wire UId="49">
-      <NameCon UId="26" Name="DiagId" />
+      <NameCon UId="24" Name="DiagId" />
       <OpenCon UId="35" />
     </Wire>
   </Wires>
