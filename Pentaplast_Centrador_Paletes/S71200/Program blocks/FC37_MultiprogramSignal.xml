@@ -1,0 +1,2009 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V16" />
+  <DocumentInfo>
+    <Created>2022-11-17T15:49:23.8409336Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V16 Update 2</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V16</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FC ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor>Robopac</HeaderAuthor>
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.0</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v4">
+  <Section Name="Input" />
+  <Section Name="Output" />
+  <Section Name="InOut" />
+  <Section Name="Temp" />
+  <Section Name="Constant" />
+  <Section Name="Return">
+    <Member Name="Ret_Val" Datatype="Void" Accessibility="Public" />
+  </Section>
+</Sections></Interface>
+      <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <MemoryLayout>Standard</MemoryLayout>
+      <Name>FC37_MultiprogramSignal</Name>
+      <Number>37</Number>
+      <ProgrammingLanguage>LAD</ProgrammingLanguage>
+      <SetENOAutomatically>false</SetENOAutomatically>
+      <UDABlockProperties />
+      <UDAEnableTagReadback>false</UDAEnableTagReadback>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>it-IT</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="4" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="LiteralConstant" UId="21">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>250</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw24" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw30" />
+      </Symbol>
+    </Access>
+    <Part Name="Sub" UId="24" DisabledENO="false">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="25">
+      <IdentCon UId="21" />
+      <NameCon UId="24" Name="in1" />
+    </Wire>
+    <Wire UId="26">
+      <IdentCon UId="22" />
+      <NameCon UId="24" Name="in2" />
+    </Wire>
+    <Wire UId="27">
+      <NameCon UId="24" Name="out" />
+      <IdentCon UId="23" />
+    </Wire>
+    <Wire UId="28">
+      <Powerrail />
+      <NameCon UId="24" Name="en" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="5" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="6" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="8" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="9" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="B" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="M91.0" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw30" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="24">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>251</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="25">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="26">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>360</ConstantValue>
+      </Constant>
+    </Access>
+    <Part Name="Contact" UId="27" />
+    <Call UId="28">
+      <CallInfo Name="FC100_BlockMoveIdexed" BlockType="FC">
+        <Parameter Name="DBSource" Section="Input" Type="Int" />
+        <Parameter Name="ByteSource" Section="Input" Type="Int" />
+        <Parameter Name="DBDestination" Section="Input" Type="Int" />
+        <Parameter Name="ByteDestination" Section="Input" Type="Int" />
+        <Parameter Name="ByteNumber" Section="Input" Type="Int" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="29">
+      <Powerrail />
+      <NameCon UId="27" Name="in" />
+    </Wire>
+    <Wire UId="30">
+      <IdentCon UId="21" />
+      <NameCon UId="27" Name="operand" />
+    </Wire>
+    <Wire UId="31">
+      <NameCon UId="27" Name="out" />
+      <NameCon UId="28" Name="en" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="22" />
+      <NameCon UId="28" Name="DBSource" />
+    </Wire>
+    <Wire UId="33">
+      <IdentCon UId="23" />
+      <NameCon UId="28" Name="ByteSource" />
+    </Wire>
+    <Wire UId="34">
+      <IdentCon UId="24" />
+      <NameCon UId="28" Name="DBDestination" />
+    </Wire>
+    <Wire UId="35">
+      <IdentCon UId="25" />
+      <NameCon UId="28" Name="ByteDestination" />
+    </Wire>
+    <Wire UId="36">
+      <IdentCon UId="26" />
+      <NameCon UId="28" Name="ByteNumber" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="C" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="F" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="10" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="11" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Data from data table to display</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="12" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="M91.1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="22">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>251</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw30" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="25">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="26">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>360</ConstantValue>
+      </Constant>
+    </Access>
+    <Part Name="Contact" UId="27" />
+    <Call UId="28">
+      <CallInfo Name="FC100_BlockMoveIdexed" BlockType="FC">
+        <Parameter Name="DBSource" Section="Input" Type="Int" />
+        <Parameter Name="ByteSource" Section="Input" Type="Int" />
+        <Parameter Name="DBDestination" Section="Input" Type="Int" />
+        <Parameter Name="ByteDestination" Section="Input" Type="Int" />
+        <Parameter Name="ByteNumber" Section="Input" Type="Int" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="29">
+      <Powerrail />
+      <NameCon UId="27" Name="in" />
+    </Wire>
+    <Wire UId="30">
+      <IdentCon UId="21" />
+      <NameCon UId="27" Name="operand" />
+    </Wire>
+    <Wire UId="31">
+      <NameCon UId="27" Name="out" />
+      <NameCon UId="28" Name="en" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="22" />
+      <NameCon UId="28" Name="DBSource" />
+    </Wire>
+    <Wire UId="33">
+      <IdentCon UId="23" />
+      <NameCon UId="28" Name="ByteSource" />
+    </Wire>
+    <Wire UId="34">
+      <IdentCon UId="24" />
+      <NameCon UId="28" Name="DBDestination" />
+    </Wire>
+    <Wire UId="35">
+      <IdentCon UId="25" />
+      <NameCon UId="28" Name="ByteDestination" />
+    </Wire>
+    <Wire UId="36">
+      <IdentCon UId="26" />
+      <NameCon UId="28" Name="ByteNumber" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Data from display to data table</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="TransitIn" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="E37" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="TransitInBkw" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="E40" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="M0.0" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="ConvOk1" />
+      </Symbol>
+    </Access>
+    <Access Scope="Address" UId="27">
+      <Address Area="DB" Type="Word" BlockNumber="3" BitOffset="16" />
+    </Access>
+    <Access Scope="LiteralConstant" UId="28">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="29">
+      <Symbol>
+        <Component Name="M91.2" />
+      </Symbol>
+    </Access>
+    <Part Name="Contact" UId="30" />
+    <Part Name="Contact" UId="31">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Contact" UId="32" />
+    <Part Name="Contact" UId="33">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Contact" UId="34" />
+    <Part Name="Contact" UId="35" />
+    <Part Name="O" UId="36">
+      <TemplateValue Name="Card" Type="Cardinality">3</TemplateValue>
+    </Part>
+    <Part Name="Eq" UId="37">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Part Name="Coil" UId="38" />
+  </Parts>
+  <Wires>
+    <Wire UId="39">
+      <Powerrail />
+      <NameCon UId="30" Name="in" />
+      <NameCon UId="32" Name="in" />
+      <NameCon UId="34" Name="in" />
+    </Wire>
+    <Wire UId="40">
+      <IdentCon UId="21" />
+      <NameCon UId="30" Name="operand" />
+    </Wire>
+    <Wire UId="41">
+      <NameCon UId="30" Name="out" />
+      <NameCon UId="31" Name="in" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="22" />
+      <NameCon UId="31" Name="operand" />
+    </Wire>
+    <Wire UId="43">
+      <NameCon UId="31" Name="out" />
+      <NameCon UId="36" Name="in1" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="23" />
+      <NameCon UId="32" Name="operand" />
+    </Wire>
+    <Wire UId="45">
+      <NameCon UId="32" Name="out" />
+      <NameCon UId="33" Name="in" />
+    </Wire>
+    <Wire UId="46">
+      <IdentCon UId="24" />
+      <NameCon UId="33" Name="operand" />
+    </Wire>
+    <Wire UId="47">
+      <NameCon UId="33" Name="out" />
+      <NameCon UId="36" Name="in2" />
+    </Wire>
+    <Wire UId="48">
+      <IdentCon UId="25" />
+      <NameCon UId="34" Name="operand" />
+    </Wire>
+    <Wire UId="49">
+      <NameCon UId="34" Name="out" />
+      <NameCon UId="35" Name="in" />
+    </Wire>
+    <Wire UId="50">
+      <IdentCon UId="26" />
+      <NameCon UId="35" Name="operand" />
+    </Wire>
+    <Wire UId="51">
+      <NameCon UId="35" Name="out" />
+      <NameCon UId="36" Name="in3" />
+    </Wire>
+    <Wire UId="52">
+      <NameCon UId="36" Name="out" />
+      <NameCon UId="37" Name="pre" />
+    </Wire>
+    <Wire UId="53">
+      <IdentCon UId="27" />
+      <NameCon UId="37" Name="in1" />
+    </Wire>
+    <Wire UId="54">
+      <IdentCon UId="28" />
+      <NameCon UId="37" Name="in2" />
+    </Wire>
+    <Wire UId="55">
+      <NameCon UId="37" Name="out" />
+      <NameCon UId="38" Name="in" />
+    </Wire>
+    <Wire UId="56">
+      <IdentCon UId="29" />
+      <NameCon UId="38" Name="operand" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="1A" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="1B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="1D" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="1E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="1F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Program active is Ok</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="20" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="On" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="In_Pos5" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="V50_5" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="TransitIn" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="V90_7" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw22" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="27">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>16</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="28">
+      <Symbol>
+        <Component Name="E119" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="29">
+      <Symbol>
+        <Component Name="E120" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="30">
+      <Constant>
+        <ConstantType>Byte</ConstantType>
+        <ConstantValue>1</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="31">
+      <Address Area="DB" Type="Byte" BlockNumber="3" BitOffset="216" />
+    </Access>
+    <Access Scope="GlobalVariable" UId="32">
+      <Symbol>
+        <Component Name="E119" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="33">
+      <Symbol>
+        <Component Name="E120" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="34">
+      <Constant>
+        <ConstantType>Byte</ConstantType>
+        <ConstantValue>2</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="35">
+      <Address Area="DB" Type="Byte" BlockNumber="3" BitOffset="216" />
+    </Access>
+    <Access Scope="GlobalVariable" UId="36">
+      <Symbol>
+        <Component Name="E119" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="37">
+      <Symbol>
+        <Component Name="E120" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="38">
+      <Constant>
+        <ConstantType>Byte</ConstantType>
+        <ConstantValue>3</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="39">
+      <Address Area="DB" Type="Byte" BlockNumber="3" BitOffset="216" />
+    </Access>
+    <Access Scope="LiteralConstant" UId="40">
+      <Constant>
+        <ConstantType>Byte</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="41">
+      <Address Area="DB" Type="Byte" BlockNumber="3" BitOffset="208" />
+    </Access>
+    <Part Name="Contact" UId="42" />
+    <Part Name="Contact" UId="43" />
+    <Part Name="Contact" UId="44">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Contact" UId="45">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Contact" UId="46">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Eq" UId="47">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Part Name="Contact" UId="48" />
+    <Part Name="Contact" UId="49" />
+    <Part Name="Move" UId="50" DisabledENO="true">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+    <Part Name="Contact" UId="51" />
+    <Part Name="Contact" UId="52">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Move" UId="53" DisabledENO="true">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+    <Part Name="Contact" UId="54">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Contact" UId="55">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Move" UId="56" DisabledENO="true">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+    <Part Name="Move" UId="57" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="58">
+      <Powerrail />
+      <NameCon UId="42" Name="in" />
+    </Wire>
+    <Wire UId="59">
+      <IdentCon UId="21" />
+      <NameCon UId="42" Name="operand" />
+    </Wire>
+    <Wire UId="60">
+      <NameCon UId="42" Name="out" />
+      <NameCon UId="43" Name="in" />
+      <NameCon UId="57" Name="en" />
+    </Wire>
+    <Wire UId="61">
+      <IdentCon UId="22" />
+      <NameCon UId="43" Name="operand" />
+    </Wire>
+    <Wire UId="62">
+      <NameCon UId="43" Name="out" />
+      <NameCon UId="44" Name="in" />
+    </Wire>
+    <Wire UId="63">
+      <IdentCon UId="23" />
+      <NameCon UId="44" Name="operand" />
+    </Wire>
+    <Wire UId="64">
+      <NameCon UId="44" Name="out" />
+      <NameCon UId="45" Name="in" />
+    </Wire>
+    <Wire UId="65">
+      <IdentCon UId="24" />
+      <NameCon UId="45" Name="operand" />
+    </Wire>
+    <Wire UId="66">
+      <NameCon UId="45" Name="out" />
+      <NameCon UId="46" Name="in" />
+    </Wire>
+    <Wire UId="67">
+      <IdentCon UId="25" />
+      <NameCon UId="46" Name="operand" />
+    </Wire>
+    <Wire UId="68">
+      <NameCon UId="46" Name="out" />
+      <NameCon UId="47" Name="pre" />
+    </Wire>
+    <Wire UId="69">
+      <IdentCon UId="26" />
+      <NameCon UId="47" Name="in1" />
+    </Wire>
+    <Wire UId="70">
+      <IdentCon UId="27" />
+      <NameCon UId="47" Name="in2" />
+    </Wire>
+    <Wire UId="71">
+      <NameCon UId="47" Name="out" />
+      <NameCon UId="48" Name="in" />
+      <NameCon UId="51" Name="in" />
+      <NameCon UId="54" Name="in" />
+    </Wire>
+    <Wire UId="72">
+      <IdentCon UId="28" />
+      <NameCon UId="48" Name="operand" />
+    </Wire>
+    <Wire UId="73">
+      <NameCon UId="48" Name="out" />
+      <NameCon UId="49" Name="in" />
+    </Wire>
+    <Wire UId="74">
+      <IdentCon UId="29" />
+      <NameCon UId="49" Name="operand" />
+    </Wire>
+    <Wire UId="75">
+      <NameCon UId="49" Name="out" />
+      <NameCon UId="50" Name="en" />
+    </Wire>
+    <Wire UId="76">
+      <IdentCon UId="30" />
+      <NameCon UId="50" Name="in" />
+    </Wire>
+    <Wire UId="77">
+      <NameCon UId="50" Name="out1" />
+      <IdentCon UId="31" />
+    </Wire>
+    <Wire UId="78">
+      <IdentCon UId="32" />
+      <NameCon UId="51" Name="operand" />
+    </Wire>
+    <Wire UId="79">
+      <NameCon UId="51" Name="out" />
+      <NameCon UId="52" Name="in" />
+    </Wire>
+    <Wire UId="80">
+      <IdentCon UId="33" />
+      <NameCon UId="52" Name="operand" />
+    </Wire>
+    <Wire UId="81">
+      <NameCon UId="52" Name="out" />
+      <NameCon UId="53" Name="en" />
+    </Wire>
+    <Wire UId="82">
+      <IdentCon UId="34" />
+      <NameCon UId="53" Name="in" />
+    </Wire>
+    <Wire UId="83">
+      <NameCon UId="53" Name="out1" />
+      <IdentCon UId="35" />
+    </Wire>
+    <Wire UId="84">
+      <IdentCon UId="36" />
+      <NameCon UId="54" Name="operand" />
+    </Wire>
+    <Wire UId="85">
+      <NameCon UId="54" Name="out" />
+      <NameCon UId="55" Name="in" />
+    </Wire>
+    <Wire UId="86">
+      <IdentCon UId="37" />
+      <NameCon UId="55" Name="operand" />
+    </Wire>
+    <Wire UId="87">
+      <NameCon UId="55" Name="out" />
+      <NameCon UId="56" Name="en" />
+    </Wire>
+    <Wire UId="88">
+      <IdentCon UId="38" />
+      <NameCon UId="56" Name="in" />
+    </Wire>
+    <Wire UId="89">
+      <NameCon UId="56" Name="out1" />
+      <IdentCon UId="39" />
+    </Wire>
+    <Wire UId="90">
+      <IdentCon UId="40" />
+      <NameCon UId="57" Name="in" />
+    </Wire>
+    <Wire UId="91">
+      <NameCon UId="57" Name="out1" />
+      <IdentCon UId="41" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="21" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="22" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="23" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="24" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="25" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="26" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>SELEZIONE ESTERNA CON FOTOCELLULE DI CONTROLLO</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="27" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="TransitIn" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw26" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw28" />
+      </Symbol>
+    </Access>
+    <Part Name="Contact" UId="24" />
+    <Part Name="Move" UId="25" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="26">
+      <IdentCon UId="21" />
+      <NameCon UId="24" Name="operand" />
+    </Wire>
+    <Wire UId="27">
+      <IdentCon UId="22" />
+      <NameCon UId="25" Name="in" />
+    </Wire>
+    <Wire UId="28">
+      <NameCon UId="25" Name="out1" />
+      <IdentCon UId="23" />
+    </Wire>
+    <Wire UId="29">
+      <NameCon UId="24" Name="out" />
+      <NameCon UId="25" Name="en" />
+    </Wire>
+    <Wire UId="30">
+      <Powerrail />
+      <NameCon UId="24" Name="in" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="28" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="29" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="2B" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="2C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="2D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Program selection by external signal</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="2E" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw22" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="22">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>16</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>16</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw22" />
+      </Symbol>
+    </Access>
+    <Part Name="Gt" UId="25">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Part Name="Move" UId="26" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="27">
+      <Powerrail />
+      <NameCon UId="25" Name="pre" />
+    </Wire>
+    <Wire UId="28">
+      <IdentCon UId="21" />
+      <NameCon UId="25" Name="in1" />
+    </Wire>
+    <Wire UId="29">
+      <IdentCon UId="22" />
+      <NameCon UId="25" Name="in2" />
+    </Wire>
+    <Wire UId="30">
+      <NameCon UId="25" Name="out" />
+      <NameCon UId="26" Name="en" />
+    </Wire>
+    <Wire UId="31">
+      <IdentCon UId="23" />
+      <NameCon UId="26" Name="in" />
+    </Wire>
+    <Wire UId="32">
+      <NameCon UId="26" Name="out1" />
+      <IdentCon UId="24" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="2F" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="30" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="31" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="32" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="33" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="34" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Forzamento per selezione esterna</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="35" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="M91.2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw22" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>16</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw22" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw20" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw22" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="27">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>16</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="28">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw28" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="29">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw20" />
+      </Symbol>
+    </Access>
+    <Part Name="Contact" UId="30" />
+    <Part Name="Ne" UId="31">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Part Name="Move" UId="32" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+    <Part Name="Eq" UId="33">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Part Name="Move" UId="34" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="35">
+      <IdentCon UId="21" />
+      <NameCon UId="30" Name="operand" />
+    </Wire>
+    <Wire UId="36">
+      <IdentCon UId="22" />
+      <NameCon UId="31" Name="in1" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="23" />
+      <NameCon UId="31" Name="in2" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="31" Name="out" />
+      <NameCon UId="32" Name="en" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="24" />
+      <NameCon UId="32" Name="in" />
+    </Wire>
+    <Wire UId="40">
+      <NameCon UId="32" Name="out1" />
+      <IdentCon UId="25" />
+    </Wire>
+    <Wire UId="41">
+      <IdentCon UId="26" />
+      <NameCon UId="33" Name="in1" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="27" />
+      <NameCon UId="33" Name="in2" />
+    </Wire>
+    <Wire UId="43">
+      <NameCon UId="33" Name="out" />
+      <NameCon UId="34" Name="en" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="28" />
+      <NameCon UId="34" Name="in" />
+    </Wire>
+    <Wire UId="45">
+      <NameCon UId="34" Name="out1" />
+      <IdentCon UId="29" />
+    </Wire>
+    <Wire UId="46">
+      <NameCon UId="30" Name="out" />
+      <NameCon UId="31" Name="pre" />
+      <NameCon UId="33" Name="pre" />
+    </Wire>
+    <Wire UId="47">
+      <Powerrail />
+      <NameCon UId="30" Name="in" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="36" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="37" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="38" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="39" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="3A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="3B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Program selection by display</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="3C" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="M91.2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw20" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>1</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="24">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>250</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw20" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw30" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="27">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw30" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="28">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="29">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>250</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="30">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="LiteralConstant" UId="31">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>360</ConstantValue>
+      </Constant>
+    </Access>
+    <Part Name="Contact" UId="32" />
+    <Part Name="Ge" UId="33">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Part Name="Sub" UId="34" DisabledENO="false">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Call UId="35">
+      <CallInfo Name="FC100_BlockMoveIdexed" BlockType="FC">
+        <Parameter Name="DBSource" Section="Input" Type="Int" />
+        <Parameter Name="ByteSource" Section="Input" Type="Int" />
+        <Parameter Name="DBDestination" Section="Input" Type="Int" />
+        <Parameter Name="ByteDestination" Section="Input" Type="Int" />
+        <Parameter Name="ByteNumber" Section="Input" Type="Int" />
+      </CallInfo>
+    </Call>
+  </Parts>
+  <Wires>
+    <Wire UId="36">
+      <Powerrail />
+      <NameCon UId="32" Name="in" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="21" />
+      <NameCon UId="32" Name="operand" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="32" Name="out" />
+      <NameCon UId="33" Name="pre" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="22" />
+      <NameCon UId="33" Name="in1" />
+    </Wire>
+    <Wire UId="40">
+      <IdentCon UId="23" />
+      <NameCon UId="33" Name="in2" />
+    </Wire>
+    <Wire UId="41">
+      <NameCon UId="33" Name="out" />
+      <NameCon UId="34" Name="en" />
+      <NameCon UId="35" Name="en" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="24" />
+      <NameCon UId="34" Name="in1" />
+    </Wire>
+    <Wire UId="43">
+      <IdentCon UId="25" />
+      <NameCon UId="34" Name="in2" />
+    </Wire>
+    <Wire UId="44">
+      <NameCon UId="34" Name="out" />
+      <IdentCon UId="26" />
+    </Wire>
+    <Wire UId="45">
+      <IdentCon UId="27" />
+      <NameCon UId="35" Name="DBSource" />
+    </Wire>
+    <Wire UId="46">
+      <IdentCon UId="28" />
+      <NameCon UId="35" Name="ByteSource" />
+    </Wire>
+    <Wire UId="47">
+      <IdentCon UId="29" />
+      <NameCon UId="35" Name="DBDestination" />
+    </Wire>
+    <Wire UId="48">
+      <IdentCon UId="30" />
+      <NameCon UId="35" Name="ByteDestination" />
+    </Wire>
+    <Wire UId="49">
+      <IdentCon UId="31" />
+      <NameCon UId="35" Name="ByteNumber" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="3D" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="3E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="3F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="40" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="41" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="42" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Data from data table to active program</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="43" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="DB250_ProgramData" />
+        <Component Name="Program" />
+        <Component Name="Wrapping" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="M91.2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Byte</ConstantType>
+        <ConstantValue>2</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="24">
+      <Address Area="DB" Type="Byte" BlockNumber="3" BitOffset="16" />
+    </Access>
+    <Part Name="Contact" UId="25" />
+    <Part Name="Contact" UId="26" />
+    <Part Name="Move" UId="27" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="28">
+      <Powerrail />
+      <NameCon UId="25" Name="in" />
+    </Wire>
+    <Wire UId="29">
+      <IdentCon UId="21" />
+      <NameCon UId="25" Name="operand" />
+    </Wire>
+    <Wire UId="30">
+      <NameCon UId="25" Name="out" />
+      <NameCon UId="26" Name="in" />
+    </Wire>
+    <Wire UId="31">
+      <IdentCon UId="22" />
+      <NameCon UId="26" Name="operand" />
+    </Wire>
+    <Wire UId="32">
+      <NameCon UId="26" Name="out" />
+      <NameCon UId="27" Name="en" />
+    </Wire>
+    <Wire UId="33">
+      <IdentCon UId="23" />
+      <NameCon UId="27" Name="in" />
+    </Wire>
+    <Wire UId="34">
+      <NameCon UId="27" Name="out1" />
+      <IdentCon UId="24" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="44" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="45" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="46" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="47" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="48" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="49" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="4A" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="DB250_ProgramData" />
+        <Component Name="Program" />
+        <Component Name="Wrapping" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbw20" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="23">
+      <Constant>
+        <ConstantType>Int</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="E46" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="DB21_DisplayGeneralData" />
+        <Component Name="dbx0_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="M91.2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="27">
+      <Constant>
+        <ConstantType>Byte</ConstantType>
+        <ConstantValue>1</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="28">
+      <Address Area="DB" Type="Byte" BlockNumber="3" BitOffset="16" />
+    </Access>
+    <Part Name="Contact" UId="29">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Eq" UId="30">
+      <TemplateValue Name="SrcType" Type="Type">Int</TemplateValue>
+    </Part>
+    <Part Name="Contact" UId="31" />
+    <Part Name="Contact" UId="32">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="O" UId="33">
+      <TemplateValue Name="Card" Type="Cardinality">4</TemplateValue>
+    </Part>
+    <Part Name="Contact" UId="34" />
+    <Part Name="Move" UId="35" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="36">
+      <Powerrail />
+      <NameCon UId="29" Name="in" />
+      <NameCon UId="30" Name="pre" />
+      <NameCon UId="31" Name="in" />
+      <NameCon UId="32" Name="in" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="21" />
+      <NameCon UId="29" Name="operand" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="29" Name="out" />
+      <NameCon UId="33" Name="in1" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="22" />
+      <NameCon UId="30" Name="in1" />
+    </Wire>
+    <Wire UId="40">
+      <IdentCon UId="23" />
+      <NameCon UId="30" Name="in2" />
+    </Wire>
+    <Wire UId="41">
+      <NameCon UId="30" Name="out" />
+      <NameCon UId="33" Name="in2" />
+    </Wire>
+    <Wire UId="42">
+      <IdentCon UId="24" />
+      <NameCon UId="31" Name="operand" />
+    </Wire>
+    <Wire UId="43">
+      <NameCon UId="31" Name="out" />
+      <NameCon UId="33" Name="in3" />
+    </Wire>
+    <Wire UId="44">
+      <IdentCon UId="25" />
+      <NameCon UId="32" Name="operand" />
+    </Wire>
+    <Wire UId="45">
+      <NameCon UId="32" Name="out" />
+      <NameCon UId="33" Name="in4" />
+    </Wire>
+    <Wire UId="46">
+      <NameCon UId="33" Name="out" />
+      <NameCon UId="34" Name="in" />
+    </Wire>
+    <Wire UId="47">
+      <IdentCon UId="26" />
+      <NameCon UId="34" Name="operand" />
+    </Wire>
+    <Wire UId="48">
+      <NameCon UId="34" Name="out" />
+      <NameCon UId="35" Name="en" />
+    </Wire>
+    <Wire UId="49">
+      <IdentCon UId="27" />
+      <NameCon UId="35" Name="in" />
+    </Wire>
+    <Wire UId="50">
+      <NameCon UId="35" Name="out1" />
+      <IdentCon UId="28" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="4B" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="4C" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="4D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="4E" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="4F" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="50" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="51" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="ConvOk1" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="E47" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="M91.2" />
+      </Symbol>
+    </Access>
+    <Access Scope="TypedConstant" UId="24">
+      <Constant>
+        <ConstantValue>B#16#1</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="DB03_Machine" />
+        <Component Name="dbb3" />
+      </Symbol>
+    </Access>
+    <Part Name="Contact" UId="26">
+      <Negated Name="operand" />
+    </Part>
+    <Part Name="Contact" UId="27" />
+    <Part Name="Contact" UId="28" />
+    <Part Name="Move" UId="29" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="30">
+      <IdentCon UId="21" />
+      <NameCon UId="26" Name="operand" />
+    </Wire>
+    <Wire UId="31">
+      <IdentCon UId="22" />
+      <NameCon UId="27" Name="operand" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="23" />
+      <NameCon UId="28" Name="operand" />
+    </Wire>
+    <Wire UId="33">
+      <IdentCon UId="24" />
+      <NameCon UId="29" Name="in" />
+    </Wire>
+    <Wire UId="34">
+      <NameCon UId="29" Name="out1" />
+      <IdentCon UId="25" />
+    </Wire>
+    <Wire UId="35">
+      <NameCon UId="26" Name="out" />
+      <NameCon UId="27" Name="in" />
+    </Wire>
+    <Wire UId="36">
+      <NameCon UId="27" Name="out" />
+      <NameCon UId="28" Name="in" />
+    </Wire>
+    <Wire UId="37">
+      <NameCon UId="28" Name="out" />
+      <NameCon UId="29" Name="en" />
+    </Wire>
+    <Wire UId="38">
+      <Powerrail />
+      <NameCon UId="26" Name="in" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="52" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="53" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="54" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="55" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="56" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="57" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text>Pressure excluded</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="58" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="M1.6" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="M2.3" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="Reset" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="DB01_Osr" />
+        <Component Name="osr90" />
+      </Symbol>
+    </Access>
+    <Access Scope="LiteralConstant" UId="25">
+      <Constant>
+        <ConstantType>Word</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="26">
+      <Address Area="DB" Type="Word" BlockNumber="3" BitOffset="16" />
+    </Access>
+    <Access Scope="LiteralConstant" UId="27">
+      <Constant>
+        <ConstantType>Byte</ConstantType>
+        <ConstantValue>0</ConstantValue>
+      </Constant>
+    </Access>
+    <Access Scope="Address" UId="28">
+      <Address Area="DB" Type="Byte" BlockNumber="3" BitOffset="72" />
+    </Access>
+    <Part Name="Contact" UId="29" />
+    <Part Name="Contact" UId="30" />
+    <Part Name="Contact" UId="31" />
+    <Part Name="PBox" UId="32" />
+    <Part Name="O" UId="33">
+      <TemplateValue Name="Card" Type="Cardinality">3</TemplateValue>
+    </Part>
+    <Part Name="Move" UId="34" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+    <Part Name="Move" UId="35" DisabledENO="false">
+      <TemplateValue Name="Card" Type="Cardinality">1</TemplateValue>
+    </Part>
+  </Parts>
+  <Wires>
+    <Wire UId="36">
+      <Powerrail />
+      <NameCon UId="29" Name="in" />
+      <NameCon UId="30" Name="in" />
+      <NameCon UId="31" Name="in" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="21" />
+      <NameCon UId="29" Name="operand" />
+    </Wire>
+    <Wire UId="38">
+      <NameCon UId="29" Name="out" />
+      <NameCon UId="33" Name="in1" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="22" />
+      <NameCon UId="30" Name="operand" />
+    </Wire>
+    <Wire UId="40">
+      <NameCon UId="30" Name="out" />
+      <NameCon UId="33" Name="in2" />
+    </Wire>
+    <Wire UId="41">
+      <IdentCon UId="23" />
+      <NameCon UId="31" Name="operand" />
+    </Wire>
+    <Wire UId="42">
+      <NameCon UId="31" Name="out" />
+      <NameCon UId="32" Name="in" />
+    </Wire>
+    <Wire UId="43">
+      <IdentCon UId="24" />
+      <NameCon UId="32" Name="bit" />
+    </Wire>
+    <Wire UId="44">
+      <NameCon UId="32" Name="out" />
+      <NameCon UId="33" Name="in3" />
+    </Wire>
+    <Wire UId="45">
+      <NameCon UId="33" Name="out" />
+      <NameCon UId="34" Name="en" />
+      <NameCon UId="35" Name="en" />
+    </Wire>
+    <Wire UId="46">
+      <IdentCon UId="25" />
+      <NameCon UId="34" Name="in" />
+    </Wire>
+    <Wire UId="47">
+      <NameCon UId="34" Name="out1" />
+      <IdentCon UId="26" />
+    </Wire>
+    <Wire UId="48">
+      <IdentCon UId="27" />
+      <NameCon UId="35" Name="in" />
+    </Wire>
+    <Wire UId="49">
+      <NameCon UId="35" Name="out1" />
+      <IdentCon UId="28" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="59" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="5A" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="5B" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="5C" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="5D" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="5E" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="5F" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="60" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="61" CompositionName="Items">
+            <AttributeList>
+              <Culture>it-IT</Culture>
+              <Text>Multiprogram with program selection by external signal</Text>
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FC>
+</Document>

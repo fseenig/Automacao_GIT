@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V16" />
+  <DocumentInfo>
+    <Created>2022-11-17T15:49:42.114243Z</Created>
+    <ExportSetting>WithDefaults</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Version Control Interface</DisplayName>
+        <DisplayVersion>V16 Update 2</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>SINAMICS Startdrive Advanced</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G130, G150, S120, S150, SINAMICS MV, S210</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </OptionPackage>
+      <OptionPackage>
+        <DisplayName>SINAMICS Startdrive G110M, G120, G120C, G120D, G120P, G115D</DisplayName>
+        <DisplayVersion>V16 Update 5</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V16</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V16 Update 6</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.GlobalDB ID="0">
+    <AttributeList>
+      <AutoNumber>false</AutoNumber>
+      <HeaderAuthor />
+      <HeaderFamily />
+      <HeaderName />
+      <HeaderVersion>0.1</HeaderVersion>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v4">
+  <Section Name="Static">
+    <Member Name="U201" Datatype="&quot;InverterData&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="control_word" Datatype="Word"><StartValue>16#047A</StartValue></Member><Member Name="setpoint" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="ref_quantity" Datatype="Struct"><Member Name="speed_p2000" Datatype="Real"><StartValue>3000.0</StartValue></Member><Member Name="current_p2002" Datatype="Real"><StartValue>5.0</StartValue></Member><Member Name="torque_p2003" Datatype="Real"><StartValue>7.61</StartValue></Member></Member><Member Name="status_word" Datatype="Word"><StartValue>16#EB40</StartValue></Member><Member Name="actual_speed" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_current" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_torque" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_alarm" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="actual_fault" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_RD" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_WR" Datatype="Word"><StartValue>16#0000</StartValue></Member></Section></Sections></Member>
+    <Member Name="U221" Datatype="&quot;InverterData&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="control_word" Datatype="Word"><StartValue>16#047E</StartValue></Member><Member Name="setpoint" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="ref_quantity" Datatype="Struct"><Member Name="speed_p2000" Datatype="Real"><StartValue>3000.0</StartValue></Member><Member Name="current_p2002" Datatype="Real"><StartValue>1.86</StartValue></Member><Member Name="torque_p2003" Datatype="Real"><StartValue>3.59</StartValue></Member></Member><Member Name="status_word" Datatype="Word"><StartValue>16#EB31</StartValue></Member><Member Name="actual_speed" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_current" Datatype="Real"><StartValue>0.001702881</StartValue></Member><Member Name="actual_torque" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_alarm" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="actual_fault" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_RD" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_WR" Datatype="Word"><StartValue>16#0000</StartValue></Member></Section></Sections></Member>
+    <Member Name="U241" Datatype="&quot;InverterData&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="control_word" Datatype="Word"><StartValue>16#047E</StartValue></Member><Member Name="setpoint" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="ref_quantity" Datatype="Struct"><Member Name="speed_p2000" Datatype="Real"><StartValue>3000.0</StartValue></Member><Member Name="current_p2002" Datatype="Real"><StartValue>1.86</StartValue></Member><Member Name="torque_p2003" Datatype="Real"><StartValue>3.59</StartValue></Member></Member><Member Name="status_word" Datatype="Word"><StartValue>16#EB31</StartValue></Member><Member Name="actual_speed" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_current" Datatype="Real"><StartValue>0.002043457</StartValue></Member><Member Name="actual_torque" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_alarm" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="actual_fault" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_RD" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_WR" Datatype="Word"><StartValue>16#0000</StartValue></Member></Section></Sections></Member>
+    <Member Name="U261" Datatype="&quot;InverterData&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="control_word" Datatype="Word"><StartValue>16#047E</StartValue></Member><Member Name="setpoint" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="ref_quantity" Datatype="Struct"><Member Name="speed_p2000" Datatype="Real"><StartValue>3000.0</StartValue></Member><Member Name="current_p2002" Datatype="Real"><StartValue>1.86</StartValue></Member><Member Name="torque_p2003" Datatype="Real"><StartValue>3.59</StartValue></Member></Member><Member Name="status_word" Datatype="Word"><StartValue>16#EB31</StartValue></Member><Member Name="actual_speed" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_current" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_torque" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_alarm" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="actual_fault" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_RD" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_WR" Datatype="Word"><StartValue>16#0000</StartValue></Member></Section></Sections></Member>
+    <Member Name="U321" Datatype="&quot;InverterData&quot;" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList><Sections><Section Name="None"><Member Name="control_word" Datatype="Word"><StartValue>16#047E</StartValue></Member><Member Name="setpoint" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="ref_quantity" Datatype="Struct"><Member Name="speed_p2000" Datatype="Real"><StartValue>3000.0</StartValue></Member><Member Name="current_p2002" Datatype="Real"><StartValue>6.9</StartValue></Member><Member Name="torque_p2003" Datatype="Real"><StartValue>29.5</StartValue></Member></Member><Member Name="status_word" Datatype="Word"><StartValue>16#EB31</StartValue></Member><Member Name="actual_speed" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_current" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_torque" Datatype="Real"><StartValue>0.0</StartValue></Member><Member Name="actual_alarm" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="actual_fault" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_RD" Datatype="Word"><StartValue>16#0000</StartValue></Member><Member Name="RETVAL_WR" Datatype="Word"><StartValue>16#0000</StartValue></Member></Section></Sections></Member>
+  </Section>
+</Sections></Interface>
+      <IsOnlyStoredInLoadMemory>false</IsOnlyStoredInLoadMemory>
+      <IsWriteProtectedInAS>false</IsWriteProtectedInAS>
+      <MemoryLayout>Standard</MemoryLayout>
+      <Name>Inverter_Data</Name>
+      <Number>210</Number>
+      <ProgrammingLanguage>DB</ProgrammingLanguage>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="3" CompositionName="Items">
+            <AttributeList>
+              <Culture>it-IT</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <MultilingualText ID="4" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="5" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+          <MultilingualTextItem ID="6" CompositionName="Items">
+            <AttributeList>
+              <Culture>it-IT</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.GlobalDB>
+</Document>
