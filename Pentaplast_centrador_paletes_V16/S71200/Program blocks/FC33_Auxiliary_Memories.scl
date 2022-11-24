@@ -23,19 +23,19 @@ BEGIN
 	*)
 	//GESTIONE MALFUNZIONAMENTI INVERTER
 	//FAULT (anomalia)
-	 IF ("Inverter_Data".U201.actual_fault = 16#0000) AND
+	IF ("Inverter_Data".U201.actual_fault = 16#0000) AND
 	    ("Inverter_Data".U221.actual_fault = 16#0000) AND
 	    ("Inverter_Data".U241.actual_fault = 16#0000) AND
 	    ("Inverter_Data".U261.actual_fault = 16#0000) AND
 	    ("Inverter_Data".U321.actual_fault = 16#0000) THEN
-	//    
+	    //    
 	    "InverterFault" := 0;
 	    "InverterFail" := 0;
 	ELSE
 	    "InverterFault" := 1;
 	END_IF;
 	//ALARM (avviso)
-	IF  ("Inverter_Data".U201.actual_alarm = 16#0000) AND
+	IF ("Inverter_Data".U201.actual_alarm = 16#0000) AND
 	    ("Inverter_Data".U221.actual_alarm = 16#0000) AND
 	    ("Inverter_Data".U241.actual_alarm = 16#0000) AND
 	    ("Inverter_Data".U261.actual_alarm = 16#0000) AND
@@ -48,7 +48,7 @@ BEGIN
 	    "Inverter_Alarms".U241_alarm := "Inverter_Data".U241.actual_alarm;
 	    "Inverter_Alarms".U261_alarm := "Inverter_Data".U261.actual_alarm;
 	    "Inverter_Alarms".U321_alarm := "Inverter_Data".U321.actual_alarm;
-	//    
+	    //    
 	    "InverterAlarm" := 1;
 	END_IF;
 	//
@@ -67,7 +67,7 @@ BEGIN
 	    "DB23_AlarmProgram".dbx0_4 := 1;
 	END_IF;
 	//RESET (ACK)
-	IF "Timer".T4.Q  THEN
+	IF "Timer".T4.Q THEN
 	    "U201_Ack" := 1;
 	    "U221_Ack" := 1;
 	    "U241_Ack" := 1;

@@ -2,7 +2,7 @@
 <Document>
   <Engineering version="V16" />
   <DocumentInfo>
-    <Created>2022-11-17T11:55:24.242005Z</Created>
+    <Created>2022-11-24T15:20:39.3566992Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
     <InstalledProducts>
       <Product>
@@ -54,12 +54,12 @@
   <Section Name="Input">
     <Member Name="LostRetentive" Datatype="Bool" Accessibility="Public" Informative="true">
       <Comment>
-        <MultiLanguageText Lang="it-IT">True if retentive data are lost</MultiLanguageText>
+        <MultiLanguageText Lang="en-US">True if retentive data are lost</MultiLanguageText>
       </Comment>
     </Member>
     <Member Name="LostRTC" Datatype="Bool" Accessibility="Public" Informative="true">
       <Comment>
-        <MultiLanguageText Lang="it-IT">True if date and time are lost</MultiLanguageText>
+        <MultiLanguageText Lang="en-US">True if date and time are lost</MultiLanguageText>
       </Comment>
     </Member>
   </Section>

@@ -112,11 +112,11 @@ BEGIN
 	        #APP.PID_ComponenteIntegrale := #APP.PID_ComponenteIntegrale + #JogPartenzaT * 100; //Incremento di componente integrale per limitare tiri alti alla partenza 
 	    END_IF;
 	    //
-	    #APP.VariazioneTiro := #BallerinoT-#APP.BallerinoPrecedente[2];
+	    #APP.VariazioneTiro := #BallerinoT - #APP.BallerinoPrecedente[2];
 	    //#APP.VariazioneTiro := (#BallerinoT - #APP.BallPrec_2);
-	    #APP.PID_Kp := #PID_KpT*2;
-	    #APP.PID_Ki := #PID_KiT*2;
-	    #APP.PID_Kd := #PID_KdT*3;
+	    #APP.PID_Kp := #PID_KpT * 2;
+	    #APP.PID_Ki := #PID_KiT * 2;
+	    #APP.PID_Kd := #PID_KdT * 3;
 	    //
 	    IF (#APP.VariazioneTiro < 0) THEN
 	        #APP.PID_Kd := 0;
@@ -126,7 +126,7 @@ BEGIN
 	        #APP.TiroFase1 := 5;
 	    END_IF;
 	    //
-	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT-#IngressoAnalogicoMinT)*#APP.TiroFase1/100)+#IngressoAnalogicoMinT;
+	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT - #IngressoAnalogicoMinT) * #APP.TiroFase1 / 100) + #IngressoAnalogicoMinT;
 	    //
 	    //Incremento componente integrale durante la fase di accelerazione per ridurre l'errore sul tiro desiderato
 	    IF (#APP.VariazioneTiro > 0 AND #APP.ErroreAttuale > 0) THEN
@@ -157,15 +157,15 @@ BEGIN
 	    IF (#APP.Fase2OneShoot = 0) THEN
 	        #APP.VelocitaRotazioneFase2 := 0;
 	        #APP.Fase2OneShoot := 1;
-	// PID_ComponenteIntegrale = PID_ComponenteIntegrale+2000; //Fornisco un piccolo delta di velocita'alla partenza per evitare di tirare strattoni sul ballerino all'avvio 
+	        // PID_ComponenteIntegrale = PID_ComponenteIntegrale+2000; //Fornisco un piccolo delta di velocita'alla partenza per evitare di tirare strattoni sul ballerino all'avvio 
 	    END_IF;
 	    #APP.PID_Kp := #PID_KpT;
 	    #APP.PID_Ki := #PID_KiT;
 	    #APP.PID_Kd := #PID_KdT;
 	    IF (#APP.Tiro >= 50) THEN
-	        #APP.PID_Ki := (15+20*#PID_KiT)/30; //Per tiri alti diminuisco il guadagno integrale per rendere il regolatore meno pronto e farlo oscillare meno.
+	        #APP.PID_Ki := (15 + 20 * #PID_KiT) / 30; //Per tiri alti diminuisco il guadagno integrale per rendere il regolatore meno pronto e farlo oscillare meno.
 	    END_IF;
-	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT-#IngressoAnalogicoMinT)*#APP.Tiro/100)+#IngressoAnalogicoMinT;
+	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT - #IngressoAnalogicoMinT) * #APP.Tiro / 100) + #IngressoAnalogicoMinT;
 	    #APP.TiroFase1 := #APP.Tiro;
 	    //
 	    //Velocita' di rotazione braccio nella Fase 2. Filtro di 3 scansioni
@@ -182,7 +182,7 @@ BEGIN
 	        #APP.TimerFase2 := 0;
 	    END_IF;
 	    //
-	    #APP.TempoRotturaFilm := #TempoRotturaFilmT*10/3; //Tempo rottura film in numero di scansioni
+	    #APP.TempoRotturaFilm := #TempoRotturaFilmT * 10 / 3; //Tempo rottura film in numero di scansioni
 	    IF (#APP.TimerFase2 >= #APP.TempoRotturaFilm) THEN
 	        #APP.PID_ComponenteIntegrale := 0;
 	        #APP.TimerFase2 := 0;
@@ -193,7 +193,7 @@ BEGIN
 	// Fase 3: Transitorio velocita' alta -> media
 	//********************************************
 	IF (#APP.Tiro > 100 AND #APP.Tiro <= 200) THEN
-	    #APP.Fase := 3 ;
+	    #APP.Fase := 3;
 	    #APP.Fase4OneShoot := 0;
 	    //
 	    // Inizializzazione Fase 3
@@ -202,26 +202,26 @@ BEGIN
 	        #APP.Fase3OneShoot := 1;
 	    END_IF;
 	    //
-	    #APP.LimiteComponenteIntegrale := #LimiteCompIntegraleFase3T*100;
+	    #APP.LimiteComponenteIntegrale := #LimiteCompIntegraleFase3T * 100;
 	    #APP.PID_Kp := #PID_KpT;
 	    #APP.PID_Ki := #PID_KiTransitoriT;
 	    #APP.PID_Kd := #PID_KdT;
-	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT-#IngressoAnalogicoMinT)*(#APP.Tiro-100)/100)+#IngressoAnalogicoMinT;
+	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT - #IngressoAnalogicoMinT) * (#APP.Tiro - 100) / 100) + #IngressoAnalogicoMinT;
 	    //
-	    #APP.TempIntero := #APP.VelocitaRotazioneFase2*9/10;
+	    #APP.TempIntero := #APP.VelocitaRotazioneFase2 * 9 / 10;
 	    IF (#APP.VelocitaRotazione < #APP.TempIntero AND #APP.TransitorioFase3 = 0) THEN
 	        #APP.TransitorioFase3 := 1;
 	        IF (#APP.PID_ComponenteIntegrale > #APP.LimiteComponenteIntegrale) THEN
 	            #APP.PID_ComponenteIntegrale := #APP.LimiteComponenteIntegrale;
 	        END_IF;
 	    END_IF;
-	    #APP.TiroRichiesto := #APP.Tiro-100;
+	    #APP.TiroRichiesto := #APP.Tiro - 100;
 	END_IF;
 	//
 	// Fase 4: Transitorio velocita' media -> bassa
 	// ********************************************
 	IF (#APP.Tiro = 201) THEN
-	    #APP.Fase := 4 ;
+	    #APP.Fase := 4;
 	    // Inizializzazione Fase 4
 	    IF (#APP.Fase4OneShoot = 0) THEN
 	        #APP.TransitorioFase4 := 0;
@@ -243,17 +243,17 @@ BEGIN
 	        #APP.TiroAppoggio := #APP.TiroMinimoFase4;
 	    END_IF;
 	    //
-	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT-#IngressoAnalogicoMinT)*#APP.TiroAppoggio/100)+#IngressoAnalogicoMinT;
+	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT - #IngressoAnalogicoMinT) * #APP.TiroAppoggio / 100) + #IngressoAnalogicoMinT;
 	    //
-	    #APP.LimiteComponenteIntegrale := #LimiteCompIntegraleFase4T*100;
+	    #APP.LimiteComponenteIntegrale := #LimiteCompIntegraleFase4T * 100;
 	    #APP.PID_Kp := #PID_KpT;
-	    #APP.PID_Ki := #PID_KiTransitoriT*15/10;
+	    #APP.PID_Ki := #PID_KiTransitoriT * 15 / 10;
 	    #APP.PID_Kd := #PID_KdT;
 	    IF (#APP.PID_ComponenteIntegrale > #APP.LimiteComponenteIntegrale) THEN
 	        #APP.PID_ComponenteIntegrale := #APP.LimiteComponenteIntegrale;
 	    END_IF;
 	    //
-	    #APP.TransitorioFase4 := 1 ;
+	    #APP.TransitorioFase4 := 1;
 	    #APP.TiroRichiesto := #APP.TiroAppoggio;
 	END_IF;
 	//
@@ -279,7 +279,7 @@ BEGIN
 	    #APP.PID_Kp := 0;
 	    #APP.PID_Ki := 0;
 	    #APP.PID_Kd := 0;
-	    #APP.PID_ComponenteIntegrale := #JogVelocitaT*100;
+	    #APP.PID_ComponenteIntegrale := #JogVelocitaT * 100;
 	END_IF;
 	//   
 	// Arresto repentino
@@ -292,7 +292,7 @@ BEGIN
 	    END_IF;
 	    //
 	    #APP.TimerArrestoRepentino := #APP.TimerArrestoRepentino + 1;
-	    #APP.TiroMinimoArrestoRepentino := #TiroMinimoFase4T * 175/100;
+	    #APP.TiroMinimoArrestoRepentino := #TiroMinimoFase4T * 175 / 100;
 	    //
 	    IF (#APP.TiroPrecedente <= 100) THEN
 	        #APP.TiroAppoggio := #APP.TiroPrecedente;
@@ -309,20 +309,20 @@ BEGIN
 	    #APP.SetpointTiro := ((#IngressoAnalogicoMaxT - #IngressoAnalogicoMinT) * #APP.TiroAppoggio / 100) + #IngressoAnalogicoMinT;
 	    //   
 	    #APP.PID_Kp := #PID_KpT;
-	    #APP.PID_Ki := #PID_KiTransitoriT * 175/100;
+	    #APP.PID_Ki := #PID_KiTransitoriT * 175 / 100;
 	    #APP.PID_Kd := #PID_KdT;
 	    //
 	    #APP.TiroRichiesto := #APP.TiroAppoggio;
 	END_IF;
 	//
 	// Regolatore PID standard 
-	#APP.ErroreAttuale := (#BallerinoT-#APP.SetpointTiro);
+	#APP.ErroreAttuale := (#BallerinoT - #APP.SetpointTiro);
 	//
 	// Componente proporzionale del regolatore          
-	#APP.PID_ComponenteProporzionale := #APP.PID_Kp*#APP.ErroreAttuale;
+	#APP.PID_ComponenteProporzionale := #APP.PID_Kp * #APP.ErroreAttuale;
 	//
 	// Componente integrale del regolatore
-	#APP.PID_ComponenteIntegrale := #APP.PID_ComponenteIntegrale+#APP.PID_Ki*#APP.ErroreAttuale/10;
+	#APP.PID_ComponenteIntegrale := #APP.PID_ComponenteIntegrale + #APP.PID_Ki * #APP.ErroreAttuale / 10;
 	//
 	IF (#APP.PID_ComponenteIntegrale > #PID_LimiteSuperioreIntegrale AND #APP.Tiro <> 210) THEN
 	    #APP.PID_ComponenteIntegrale := #PID_LimiteSuperioreIntegrale;
@@ -339,7 +339,7 @@ BEGIN
 	// Componente derivativa del regolatore
 	// PID_ComponenteDerivativa = 10*PID_Kd*(ErroreAttuale-ErrorePrecedente);
 	
-	#APP.PID_ComponenteDerivativa := 10*#APP.PID_Kd*(#BallerinoT-#APP.BallerinoPrecedente[2]);
+	#APP.PID_ComponenteDerivativa := 10 * #APP.PID_Kd * (#BallerinoT - #APP.BallerinoPrecedente[2]);
 	
 	//#PID_ComponenteDerivativa := 10 * #PID_Kd * (#BallerinoT - #APP.BallPrec_2);
 	//
@@ -351,7 +351,7 @@ BEGIN
 	    #APP.PID_ComponenteDerivativa := #PID_LimiteInferioreDerivativa;
 	END_IF;
 	//
-	#APP.PID_Uscita := (#APP.PID_ComponenteProporzionale+#APP.PID_ComponenteIntegrale+#APP.PID_ComponenteDerivativa)/100 ; //Le costanti Kp, Ki e Kd sono espresse nel display in centesimi
+	#APP.PID_Uscita := (#APP.PID_ComponenteProporzionale + #APP.PID_ComponenteIntegrale + #APP.PID_ComponenteDerivativa) / 100; //Le costanti Kp, Ki e Kd sono espresse nel display in centesimi
 	//
 	IF (#APP.PID_Uscita > #PID_LimiteSuperioreUscita) THEN
 	    #APP.PID_Uscita := #PID_LimiteSuperioreUscita;
@@ -385,7 +385,7 @@ BEGIN
 	// Prestiro per PGSM e PGSA
 	IF (#FunzionamentoM20T = 0) THEN
 	    //
-	    #APP.PrestiroRichiesto := INT_TO_DINT(#PrestiroT) * 500/255 + 100;
+	    #APP.PrestiroRichiesto := INT_TO_DINT(#PrestiroT) * 500 / 255 + 100;
 	    // Arrotonda sempre all'intero inferiore, a prescindere. Sommando 0.5 arrotondo all'intero piu vicino
 	    #APP.PrestiroAppoggio := 0.5 + DINT_TO_REAL(#ValoreUscitaRulloVeloce * (#PrestiroMeccanicoNativoT + 100) / #APP.PrestiroRichiesto);
 	    #APP.PrestiroAppoggio := #APP.PrestiroAppoggio + (#OffsetRulloLentoT - 10);
@@ -402,8 +402,8 @@ BEGIN
 	        #ValoreUscitaRulloLento := 255;
 	    END_IF;
 	END_IF;
-	                
-	                
+	
+	
 	
 END_FUNCTION
 

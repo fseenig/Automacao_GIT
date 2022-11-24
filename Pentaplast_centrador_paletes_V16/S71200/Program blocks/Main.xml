@@ -2,7 +2,7 @@
 <Document>
   <Engineering version="V16" />
   <DocumentInfo>
-    <Created>2022-11-17T11:55:23.4060023Z</Created>
+    <Created>2022-11-24T15:20:38.5982156Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
     <InstalledProducts>
       <Product>
@@ -51,6 +51,18 @@
       <HeaderName />
       <HeaderVersion>0.1</HeaderVersion>
       <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v4">
+  <Section Name="Input">
+    <Member Name="Initial_Call" Datatype="Bool" Accessibility="Public" Informative="true">
+      <Comment>
+        <MultiLanguageText Lang="en-US">Initial call of this OB</MultiLanguageText>
+      </Comment>
+    </Member>
+    <Member Name="Remanence" Datatype="Bool" Accessibility="Public" Informative="true">
+      <Comment>
+        <MultiLanguageText Lang="en-US">=True, if remanent data are available</MultiLanguageText>
+      </Comment>
+    </Member>
+  </Section>
   <Section Name="Temp">
     <Member Name="SALDATORE" Datatype="Bool" />
     <Member Name="PORTA" Datatype="Bool" />
@@ -5583,14 +5595,118 @@ FC86 = SPECIAL</Text>
         <AttributeList>
           <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
   <Parts>
-    <Call UId="21">
-      <CallInfo Name="Centrador_Paletes" BlockType="FC" />
+    <Access Scope="GlobalVariable" UId="21">
+      <Symbol>
+        <Component Name="Centrador_Aberto_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="Centrador_Aberto_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="23">
+      <Symbol>
+        <Component Name="E3.2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="24">
+      <Symbol>
+        <Component Name="Palete_Centrada_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="25">
+      <Symbol>
+        <Component Name="Palete_Centrada_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="26">
+      <Symbol>
+        <Component Name="Motor_Tapete_Centrador" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="27">
+      <Symbol>
+        <Component Name="Motor_Centrador_Sentido_Direto" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="28">
+      <Symbol>
+        <Component Name="Motor_Centrador_Sentido_Inverso" />
+      </Symbol>
+    </Access>
+    <Call UId="29">
+      <CallInfo Name="Centrador_Paletes" BlockType="FB">
+        <Instance Scope="GlobalVariable" UId="30">
+          <Component Name="Centrador_Paletes_DB" />
+        </Instance>
+        <Parameter Name="Centrador_Aberto_1" Section="Input" Type="Bool" />
+        <Parameter Name="Centrador_Aberto_2" Section="Input" Type="Bool" />
+        <Parameter Name="Detetor_Palete" Section="Input" Type="Bool" />
+        <Parameter Name="Palete_Centrada_1" Section="Input" Type="Bool" />
+        <Parameter Name="Palete_Centrada_2" Section="Input" Type="Bool" />
+        <Parameter Name="ETAPA 1 (INICIO)" Section="Output" Type="Bool" />
+        <Parameter Name="ETAPA 2" Section="Output" Type="Bool" />
+        <Parameter Name="ETAPA 3" Section="Output" Type="Bool" />
+        <Parameter Name="ETAPA 4" Section="Output" Type="Bool" />
+        <Parameter Name="Motor_Tapete_Centrador" Section="Output" Type="Bool" />
+        <Parameter Name="Motor_Centrador_Sentido_Direto" Section="Output" Type="Bool" />
+        <Parameter Name="Motor_Centrador_Sentido_Inverso" Section="Output" Type="Bool" />
+      </CallInfo>
     </Call>
   </Parts>
   <Wires>
-    <Wire UId="22">
+    <Wire UId="35">
       <Powerrail />
-      <NameCon UId="21" Name="en" />
+      <NameCon UId="29" Name="en" />
+    </Wire>
+    <Wire UId="36">
+      <IdentCon UId="21" />
+      <NameCon UId="29" Name="Centrador_Aberto_1" />
+    </Wire>
+    <Wire UId="37">
+      <IdentCon UId="22" />
+      <NameCon UId="29" Name="Centrador_Aberto_2" />
+    </Wire>
+    <Wire UId="38">
+      <IdentCon UId="23" />
+      <NameCon UId="29" Name="Detetor_Palete" />
+    </Wire>
+    <Wire UId="39">
+      <IdentCon UId="24" />
+      <NameCon UId="29" Name="Palete_Centrada_1" />
+    </Wire>
+    <Wire UId="40">
+      <IdentCon UId="25" />
+      <NameCon UId="29" Name="Palete_Centrada_2" />
+    </Wire>
+    <Wire UId="41">
+      <NameCon UId="29" Name="ETAPA 1 (INICIO)" />
+      <OpenCon UId="31" />
+    </Wire>
+    <Wire UId="42">
+      <NameCon UId="29" Name="ETAPA 2" />
+      <OpenCon UId="32" />
+    </Wire>
+    <Wire UId="43">
+      <NameCon UId="29" Name="ETAPA 3" />
+      <OpenCon UId="33" />
+    </Wire>
+    <Wire UId="44">
+      <NameCon UId="29" Name="ETAPA 4" />
+      <OpenCon UId="34" />
+    </Wire>
+    <Wire UId="45">
+      <NameCon UId="29" Name="Motor_Tapete_Centrador" />
+      <IdentCon UId="26" />
+    </Wire>
+    <Wire UId="46">
+      <NameCon UId="29" Name="Motor_Centrador_Sentido_Direto" />
+      <IdentCon UId="27" />
+    </Wire>
+    <Wire UId="47">
+      <NameCon UId="29" Name="Motor_Centrador_Sentido_Inverso" />
+      <IdentCon UId="28" />
     </Wire>
   </Wires>
 </FlgNet></NetworkSource>
@@ -5618,7 +5734,7 @@ FC86 = SPECIAL</Text>
               <MultilingualTextItem ID="136" CompositionName="Items">
                 <AttributeList>
                   <Culture>en-US</Culture>
-                  <Text />
+                  <Text>CONTROLO DE CENTRADOR DE PALETES</Text>
                 </AttributeList>
               </MultilingualTextItem>
               <MultilingualTextItem ID="137" CompositionName="Items">

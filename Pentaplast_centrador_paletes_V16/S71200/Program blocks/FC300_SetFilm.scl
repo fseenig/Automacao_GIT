@@ -85,7 +85,7 @@ BEGIN
 	    *)
 	    //Frequenza PRESTIRO
 	    #rapporto := #BASE_PRESTIRO + #Prestiro;
-	    #freqP := #velocita*#RAPP_PRES/#rapporto;
+	    #freqP := #velocita * #RAPP_PRES / #rapporto;
 	    //#freqP := #velocita*2/5;
 	    //
 	    //SP_INVERTER SIEMENS IN RPM (1500@50HZ) -> CONVERSIONE SECONDO PROPORZIONE    
