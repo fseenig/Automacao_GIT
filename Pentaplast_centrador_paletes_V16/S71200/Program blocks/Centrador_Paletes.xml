@@ -2,7 +2,7 @@
 <Document>
   <Engineering version="V16" />
   <DocumentInfo>
-    <Created>2022-11-24T14:13:09.8866891Z</Created>
+    <Created>2022-12-12T13:48:36.0347787Z</Created>
     <ExportSetting>WithDefaults</ExportSetting>
     <InstalledProducts>
       <Product>
@@ -43,7 +43,7 @@
       </Product>
     </InstalledProducts>
   </DocumentInfo>
-  <SW.Blocks.FC ID="0">
+  <SW.Blocks.FB ID="0">
     <AttributeList>
       <AutoNumber>true</AutoNumber>
       <HeaderAuthor />
@@ -51,24 +51,33 @@
       <HeaderName />
       <HeaderVersion>0.1</HeaderVersion>
       <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v4">
-  <Section Name="Input" />
-  <Section Name="Output" />
+  <Section Name="Input">
+    <Member Name="Centrador_Aberto_1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Centrador_Aberto_2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Detetor_Palete" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Palete_Centrada_1" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Palete_Centrada_2" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output">
+    <Member Name="ETAPA 1 (INICIO)" Datatype="Bool" Remanence="Retain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList><StartValue>true</StartValue></Member>
+    <Member Name="ETAPA 2" Datatype="Bool" Remanence="Retain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ETAPA 3" Datatype="Bool" Remanence="Retain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ETAPA 4" Datatype="Bool" Remanence="Retain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Motor_Tapete_Centrador" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Motor_Centrador_Sentido_Direto" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="Motor_Centrador_Sentido_Inverso" Datatype="Bool" Remanence="NonRetain" Accessibility="Public"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">true</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+  </Section>
   <Section Name="InOut" />
-  <Section Name="Temp">
-    <Member Name="ETAPA 1 (INICIO)" Datatype="Bool" />
-    <Member Name="ETAPA 2" Datatype="Bool" />
-    <Member Name="ETAPA 3" Datatype="Bool" />
-    <Member Name="ETAPA 4" Datatype="Bool" />
-  </Section>
+  <Section Name="Static" />
+  <Section Name="Temp" />
   <Section Name="Constant" />
-  <Section Name="Return">
-    <Member Name="Ret_Val" Datatype="Void" Accessibility="Public" />
-  </Section>
 </Sections></Interface>
       <IsIECCheckEnabled>false</IsIECCheckEnabled>
+      <IsRetainMemResEnabled>false</IsRetainMemResEnabled>
       <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
       <Name>Centrador_Paletes</Name>
-      <Number>17</Number>
+      <Number>2</Number>
       <ProgrammingLanguage>LAD</ProgrammingLanguage>
       <SetENOAutomatically>false</SetENOAutomatically>
       <UDABlockProperties />
@@ -95,68 +104,115 @@
         <AttributeList>
           <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
   <Parts>
-    <Access Scope="GlobalVariable" UId="21">
-      <Symbol>
-        <Component Name="FirstScan" />
-      </Symbol>
-    </Access>
-    <Access Scope="LocalVariable" UId="22">
+    <Access Scope="LocalVariable" UId="21">
       <Symbol>
         <Component Name="ETAPA 1 (INICIO)" />
       </Symbol>
     </Access>
-    <Access Scope="LocalVariable" UId="23">
-      <Symbol>
-        <Component Name="ETAPA 2" />
-      </Symbol>
-    </Access>
-    <Access Scope="LocalVariable" UId="24">
-      <Symbol>
-        <Component Name="ETAPA 3" />
-      </Symbol>
-    </Access>
-    <Access Scope="LocalVariable" UId="25">
+    <Access Scope="LocalVariable" UId="22">
       <Symbol>
         <Component Name="ETAPA 4" />
       </Symbol>
     </Access>
-    <Part Name="Contact" UId="26" />
-    <Part Name="SCoil" UId="27" />
-    <Part Name="RCoil" UId="28" />
-    <Part Name="RCoil" UId="29" />
-    <Part Name="RCoil" UId="30" />
+    <Access Scope="LocalVariable" UId="23">
+      <Symbol>
+        <Component Name="Centrador_Aberto_1" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="24">
+      <Symbol>
+        <Component Name="Centrador_Aberto_2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="25">
+      <Symbol>
+        <Component Name="ETAPA 2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="26">
+      <Symbol>
+        <Component Name="ETAPA 1 (INICIO)" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="27">
+      <Symbol>
+        <Component Name="ETAPA 4" />
+      </Symbol>
+    </Access>
+    <Part Name="Contact" UId="28" />
+    <Part Name="Contact" UId="29" />
+    <Part Name="O" UId="30">
+      <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+    </Part>
+    <Part Name="Contact" UId="31" />
+    <Part Name="Contact" UId="32" />
+    <Part Name="O" UId="33">
+      <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
+    </Part>
+    <Part Name="SCoil" UId="34" />
+    <Part Name="RCoil" UId="35" />
+    <Part Name="RCoil" UId="36" />
   </Parts>
   <Wires>
-    <Wire UId="31">
+    <Wire UId="37">
       <Powerrail />
-      <NameCon UId="26" Name="in" />
-    </Wire>
-    <Wire UId="32">
-      <IdentCon UId="21" />
-      <NameCon UId="26" Name="operand" />
-    </Wire>
-    <Wire UId="33">
-      <NameCon UId="26" Name="out" />
-      <NameCon UId="27" Name="in" />
       <NameCon UId="28" Name="in" />
       <NameCon UId="29" Name="in" />
-      <NameCon UId="30" Name="in" />
     </Wire>
-    <Wire UId="34">
-      <IdentCon UId="22" />
-      <NameCon UId="27" Name="operand" />
-    </Wire>
-    <Wire UId="35">
-      <IdentCon UId="23" />
+    <Wire UId="38">
+      <IdentCon UId="21" />
       <NameCon UId="28" Name="operand" />
     </Wire>
-    <Wire UId="36">
-      <IdentCon UId="24" />
+    <Wire UId="39">
+      <NameCon UId="28" Name="out" />
+      <NameCon UId="30" Name="in1" />
+    </Wire>
+    <Wire UId="40">
+      <IdentCon UId="22" />
       <NameCon UId="29" Name="operand" />
     </Wire>
-    <Wire UId="37">
+    <Wire UId="41">
+      <NameCon UId="29" Name="out" />
+      <NameCon UId="30" Name="in2" />
+    </Wire>
+    <Wire UId="42">
+      <NameCon UId="30" Name="out" />
+      <NameCon UId="31" Name="in" />
+      <NameCon UId="32" Name="in" />
+    </Wire>
+    <Wire UId="43">
+      <IdentCon UId="23" />
+      <NameCon UId="31" Name="operand" />
+    </Wire>
+    <Wire UId="44">
+      <NameCon UId="31" Name="out" />
+      <NameCon UId="33" Name="in1" />
+    </Wire>
+    <Wire UId="45">
+      <IdentCon UId="24" />
+      <NameCon UId="32" Name="operand" />
+    </Wire>
+    <Wire UId="46">
+      <NameCon UId="32" Name="out" />
+      <NameCon UId="33" Name="in2" />
+    </Wire>
+    <Wire UId="47">
+      <NameCon UId="33" Name="out" />
+      <NameCon UId="34" Name="in" />
+      <NameCon UId="35" Name="in" />
+      <NameCon UId="36" Name="in" />
+    </Wire>
+    <Wire UId="48">
       <IdentCon UId="25" />
-      <NameCon UId="30" Name="operand" />
+      <NameCon UId="34" Name="operand" />
+    </Wire>
+    <Wire UId="49">
+      <IdentCon UId="26" />
+      <NameCon UId="35" Name="operand" />
+    </Wire>
+    <Wire UId="50">
+      <IdentCon UId="27" />
+      <NameCon UId="36" Name="operand" />
     </Wire>
   </Wires>
 </FlgNet></NetworkSource>
@@ -184,7 +240,7 @@
               <MultilingualTextItem ID="9" CompositionName="Items">
                 <AttributeList>
                   <Culture>en-US</Culture>
-                  <Text>ETAPA 1 (INICIO)</Text>
+                  <Text>ETAPA 2 - Arranque de tapete do centrador</Text>
                 </AttributeList>
               </MultilingualTextItem>
               <MultilingualTextItem ID="A" CompositionName="Items">
@@ -203,22 +259,22 @@
   <Parts>
     <Access Scope="LocalVariable" UId="21">
       <Symbol>
-        <Component Name="ETAPA 1 (INICIO)" />
+        <Component Name="ETAPA 2" />
       </Symbol>
     </Access>
     <Access Scope="LocalVariable" UId="22">
       <Symbol>
-        <Component Name="ETAPA 4" />
+        <Component Name="Detetor_Palete" />
       </Symbol>
     </Access>
     <Access Scope="GlobalVariable" UId="23">
       <Symbol>
-        <Component Name="Centrador_Aberto_1" />
+        <Component Name="M13.0" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalVariable" UId="24">
+    <Access Scope="LocalVariable" UId="24">
       <Symbol>
-        <Component Name="Centrador_Aberto_2" />
+        <Component Name="ETAPA 3" />
       </Symbol>
     </Access>
     <Access Scope="LocalVariable" UId="25">
@@ -226,82 +282,44 @@
         <Component Name="ETAPA 2" />
       </Symbol>
     </Access>
-    <Access Scope="LocalVariable" UId="26">
-      <Symbol>
-        <Component Name="ETAPA 1 (INICIO)" />
-      </Symbol>
-    </Access>
-    <Access Scope="LocalVariable" UId="27">
-      <Symbol>
-        <Component Name="ETAPA 4" />
-      </Symbol>
-    </Access>
-    <Part Name="Contact" UId="28" />
-    <Part Name="Contact" UId="29" />
-    <Part Name="O" UId="30">
-      <TemplateValue Name="Card" Type="Cardinality">2</TemplateValue>
-    </Part>
-    <Part Name="Contact" UId="31" />
-    <Part Name="Contact" UId="32" />
-    <Part Name="SCoil" UId="33" />
-    <Part Name="RCoil" UId="34" />
-    <Part Name="RCoil" UId="35" />
+    <Part Name="Contact" UId="26" />
+    <Part Name="PContact" UId="27" />
+    <Part Name="SCoil" UId="28" />
+    <Part Name="RCoil" UId="29" />
   </Parts>
   <Wires>
-    <Wire UId="36">
+    <Wire UId="30">
       <Powerrail />
+      <NameCon UId="26" Name="in" />
+    </Wire>
+    <Wire UId="31">
+      <IdentCon UId="21" />
+      <NameCon UId="26" Name="operand" />
+    </Wire>
+    <Wire UId="32">
+      <NameCon UId="26" Name="out" />
+      <NameCon UId="27" Name="pre" />
+    </Wire>
+    <Wire UId="33">
+      <IdentCon UId="23" />
+      <NameCon UId="27" Name="bit" />
+    </Wire>
+    <Wire UId="34">
+      <IdentCon UId="22" />
+      <NameCon UId="27" Name="operand" />
+    </Wire>
+    <Wire UId="35">
+      <NameCon UId="27" Name="out" />
       <NameCon UId="28" Name="in" />
       <NameCon UId="29" Name="in" />
     </Wire>
-    <Wire UId="37">
-      <IdentCon UId="21" />
+    <Wire UId="36">
+      <IdentCon UId="24" />
       <NameCon UId="28" Name="operand" />
     </Wire>
-    <Wire UId="38">
-      <NameCon UId="28" Name="out" />
-      <NameCon UId="30" Name="in1" />
-    </Wire>
-    <Wire UId="39">
-      <IdentCon UId="22" />
-      <NameCon UId="29" Name="operand" />
-    </Wire>
-    <Wire UId="40">
-      <NameCon UId="29" Name="out" />
-      <NameCon UId="30" Name="in2" />
-    </Wire>
-    <Wire UId="41">
-      <NameCon UId="30" Name="out" />
-      <NameCon UId="31" Name="in" />
-    </Wire>
-    <Wire UId="42">
-      <IdentCon UId="23" />
-      <NameCon UId="31" Name="operand" />
-    </Wire>
-    <Wire UId="43">
-      <NameCon UId="31" Name="out" />
-      <NameCon UId="32" Name="in" />
-    </Wire>
-    <Wire UId="44">
-      <IdentCon UId="24" />
-      <NameCon UId="32" Name="operand" />
-    </Wire>
-    <Wire UId="45">
-      <NameCon UId="32" Name="out" />
-      <NameCon UId="33" Name="in" />
-      <NameCon UId="34" Name="in" />
-      <NameCon UId="35" Name="in" />
-    </Wire>
-    <Wire UId="46">
+    <Wire UId="37">
       <IdentCon UId="25" />
-      <NameCon UId="33" Name="operand" />
-    </Wire>
-    <Wire UId="47">
-      <IdentCon UId="26" />
-      <NameCon UId="34" Name="operand" />
-    </Wire>
-    <Wire UId="48">
-      <IdentCon UId="27" />
-      <NameCon UId="35" Name="operand" />
+      <NameCon UId="29" Name="operand" />
     </Wire>
   </Wires>
 </FlgNet></NetworkSource>
@@ -329,7 +347,7 @@
               <MultilingualTextItem ID="10" CompositionName="Items">
                 <AttributeList>
                   <Culture>en-US</Culture>
-                  <Text>ETAPA 2</Text>
+                  <Text>ETAPA 3 - Centragem da palete</Text>
                 </AttributeList>
               </MultilingualTextItem>
               <MultilingualTextItem ID="11" CompositionName="Items">
@@ -348,113 +366,15 @@
   <Parts>
     <Access Scope="LocalVariable" UId="21">
       <Symbol>
-        <Component Name="ETAPA 2" />
-      </Symbol>
-    </Access>
-    <Access Scope="GlobalVariable" UId="22">
-      <Symbol>
-        <Component Name="E3.2" />
-      </Symbol>
-    </Access>
-    <Access Scope="LocalVariable" UId="23">
-      <Symbol>
         <Component Name="ETAPA 3" />
       </Symbol>
     </Access>
-    <Access Scope="LocalVariable" UId="24">
-      <Symbol>
-        <Component Name="ETAPA 2" />
-      </Symbol>
-    </Access>
-    <Part Name="Contact" UId="25" />
-    <Part Name="Contact" UId="26" />
-    <Part Name="SCoil" UId="27" />
-    <Part Name="RCoil" UId="28" />
-  </Parts>
-  <Wires>
-    <Wire UId="29">
-      <Powerrail />
-      <NameCon UId="25" Name="in" />
-    </Wire>
-    <Wire UId="30">
-      <IdentCon UId="21" />
-      <NameCon UId="25" Name="operand" />
-    </Wire>
-    <Wire UId="31">
-      <NameCon UId="25" Name="out" />
-      <NameCon UId="26" Name="in" />
-    </Wire>
-    <Wire UId="32">
-      <IdentCon UId="22" />
-      <NameCon UId="26" Name="operand" />
-    </Wire>
-    <Wire UId="33">
-      <NameCon UId="26" Name="out" />
-      <NameCon UId="27" Name="in" />
-      <NameCon UId="28" Name="in" />
-    </Wire>
-    <Wire UId="34">
-      <IdentCon UId="23" />
-      <NameCon UId="27" Name="operand" />
-    </Wire>
-    <Wire UId="35">
-      <IdentCon UId="24" />
-      <NameCon UId="28" Name="operand" />
-    </Wire>
-  </Wires>
-</FlgNet></NetworkSource>
-          <ProgrammingLanguage>LAD</ProgrammingLanguage>
-        </AttributeList>
-        <ObjectList>
-          <MultilingualText ID="13" CompositionName="Comment">
-            <ObjectList>
-              <MultilingualTextItem ID="14" CompositionName="Items">
-                <AttributeList>
-                  <Culture>en-US</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-              <MultilingualTextItem ID="15" CompositionName="Items">
-                <AttributeList>
-                  <Culture>it-IT</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-            </ObjectList>
-          </MultilingualText>
-          <MultilingualText ID="16" CompositionName="Title">
-            <ObjectList>
-              <MultilingualTextItem ID="17" CompositionName="Items">
-                <AttributeList>
-                  <Culture>en-US</Culture>
-                  <Text>ETAPA 3</Text>
-                </AttributeList>
-              </MultilingualTextItem>
-              <MultilingualTextItem ID="18" CompositionName="Items">
-                <AttributeList>
-                  <Culture>it-IT</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-            </ObjectList>
-          </MultilingualText>
-        </ObjectList>
-      </SW.Blocks.CompileUnit>
-      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
-        <AttributeList>
-          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
-  <Parts>
-    <Access Scope="LocalVariable" UId="21">
-      <Symbol>
-        <Component Name="ETAPA 3" />
-      </Symbol>
-    </Access>
-    <Access Scope="GlobalVariable" UId="22">
+    <Access Scope="LocalVariable" UId="22">
       <Symbol>
         <Component Name="Palete_Centrada_1" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalVariable" UId="23">
+    <Access Scope="LocalVariable" UId="23">
       <Symbol>
         <Component Name="Palete_Centrada_2" />
       </Symbol>
@@ -518,6 +438,94 @@
           <ProgrammingLanguage>LAD</ProgrammingLanguage>
         </AttributeList>
         <ObjectList>
+          <MultilingualText ID="13" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="14" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="15" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="16" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="17" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text>ETAPA 4 - Retoma centrador à posição inicial (aberto)</Text>
+                </AttributeList>
+              </MultilingualTextItem>
+              <MultilingualTextItem ID="18" CompositionName="Items">
+                <AttributeList>
+                  <Culture>it-IT</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <SW.Blocks.CompileUnit ID="19" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
+  <Parts>
+    <Access Scope="LocalVariable" UId="21">
+      <Symbol>
+        <Component Name="ETAPA 2" />
+      </Symbol>
+    </Access>
+    <Access Scope="GlobalVariable" UId="22">
+      <Symbol>
+        <Component Name="DB10_ExtConveyors" />
+        <Component Name="Out_ConvPos2" />
+      </Symbol>
+    </Access>
+    <Access Scope="LocalVariable" UId="23">
+      <Symbol>
+        <Component Name="Motor_Tapete_Centrador" />
+      </Symbol>
+    </Access>
+    <Part Name="Contact" UId="24" />
+    <Part Name="Contact" UId="25" />
+    <Part Name="Coil" UId="26" />
+  </Parts>
+  <Wires>
+    <Wire UId="27">
+      <Powerrail />
+      <NameCon UId="24" Name="in" />
+    </Wire>
+    <Wire UId="28">
+      <IdentCon UId="21" />
+      <NameCon UId="24" Name="operand" />
+    </Wire>
+    <Wire UId="29">
+      <NameCon UId="24" Name="out" />
+      <NameCon UId="25" Name="in" />
+    </Wire>
+    <Wire UId="30">
+      <IdentCon UId="22" />
+      <NameCon UId="25" Name="operand" />
+    </Wire>
+    <Wire UId="31">
+      <NameCon UId="25" Name="out" />
+      <NameCon UId="26" Name="in" />
+    </Wire>
+    <Wire UId="32">
+      <IdentCon UId="23" />
+      <NameCon UId="26" Name="operand" />
+    </Wire>
+  </Wires>
+</FlgNet></NetworkSource>
+          <ProgrammingLanguage>LAD</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
           <MultilingualText ID="1A" CompositionName="Comment">
             <ObjectList>
               <MultilingualTextItem ID="1B" CompositionName="Items">
@@ -539,7 +547,7 @@
               <MultilingualTextItem ID="1E" CompositionName="Items">
                 <AttributeList>
                   <Culture>en-US</Culture>
-                  <Text>ETAPA 4</Text>
+                  <Text>COMANDO MOTOR TAPETE</Text>
                 </AttributeList>
               </MultilingualTextItem>
               <MultilingualTextItem ID="1F" CompositionName="Items">
@@ -558,12 +566,12 @@
   <Parts>
     <Access Scope="LocalVariable" UId="21">
       <Symbol>
-        <Component Name="ETAPA 2" />
+        <Component Name="ETAPA 3" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalVariable" UId="22">
+    <Access Scope="LocalVariable" UId="22">
       <Symbol>
-        <Component Name="Motor_Tapete_Centrador" />
+        <Component Name="Motor_Centrador_Sentido_Direto" />
       </Symbol>
     </Access>
     <Part Name="Contact" UId="23" />
@@ -612,7 +620,7 @@
               <MultilingualTextItem ID="25" CompositionName="Items">
                 <AttributeList>
                   <Culture>en-US</Culture>
-                  <Text>COMANDO MOTOR TAPETE</Text>
+                  <Text>MOTOR CENTRADOR SENTIDO DIRETO</Text>
                 </AttributeList>
               </MultilingualTextItem>
               <MultilingualTextItem ID="26" CompositionName="Items">
@@ -631,12 +639,12 @@
   <Parts>
     <Access Scope="LocalVariable" UId="21">
       <Symbol>
-        <Component Name="ETAPA 3" />
+        <Component Name="ETAPA 4" />
       </Symbol>
     </Access>
-    <Access Scope="GlobalVariable" UId="22">
+    <Access Scope="LocalVariable" UId="22">
       <Symbol>
-        <Component Name="Motor_Centrador_Sentido_Direto" />
+        <Component Name="Motor_Centrador_Sentido_Inverso" />
       </Symbol>
     </Access>
     <Part Name="Contact" UId="23" />
@@ -685,7 +693,7 @@
               <MultilingualTextItem ID="2C" CompositionName="Items">
                 <AttributeList>
                   <Culture>en-US</Culture>
-                  <Text>MOTOR CENTRADOR SENTIDO DIRETO</Text>
+                  <Text>MOTOR CENTRADOR SENTIDO INVERSO</Text>
                 </AttributeList>
               </MultilingualTextItem>
               <MultilingualTextItem ID="2D" CompositionName="Items">
@@ -698,128 +706,15 @@
           </MultilingualText>
         </ObjectList>
       </SW.Blocks.CompileUnit>
-      <SW.Blocks.CompileUnit ID="2E" CompositionName="CompileUnits">
-        <AttributeList>
-          <NetworkSource><FlgNet xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/FlgNet/v4">
-  <Parts>
-    <Access Scope="LocalVariable" UId="21">
-      <Symbol>
-        <Component Name="ETAPA 4" />
-      </Symbol>
-    </Access>
-    <Access Scope="GlobalVariable" UId="22">
-      <Symbol>
-        <Component Name="Motor_Centrador_Sentido_Inverso" />
-      </Symbol>
-    </Access>
-    <Part Name="Contact" UId="23" />
-    <Part Name="Coil" UId="24" />
-  </Parts>
-  <Wires>
-    <Wire UId="25">
-      <Powerrail />
-      <NameCon UId="23" Name="in" />
-    </Wire>
-    <Wire UId="26">
-      <IdentCon UId="21" />
-      <NameCon UId="23" Name="operand" />
-    </Wire>
-    <Wire UId="27">
-      <NameCon UId="23" Name="out" />
-      <NameCon UId="24" Name="in" />
-    </Wire>
-    <Wire UId="28">
-      <IdentCon UId="22" />
-      <NameCon UId="24" Name="operand" />
-    </Wire>
-  </Wires>
-</FlgNet></NetworkSource>
-          <ProgrammingLanguage>LAD</ProgrammingLanguage>
-        </AttributeList>
+      <MultilingualText ID="2E" CompositionName="Title">
         <ObjectList>
-          <MultilingualText ID="2F" CompositionName="Comment">
-            <ObjectList>
-              <MultilingualTextItem ID="30" CompositionName="Items">
-                <AttributeList>
-                  <Culture>en-US</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-              <MultilingualTextItem ID="31" CompositionName="Items">
-                <AttributeList>
-                  <Culture>it-IT</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-            </ObjectList>
-          </MultilingualText>
-          <MultilingualText ID="32" CompositionName="Title">
-            <ObjectList>
-              <MultilingualTextItem ID="33" CompositionName="Items">
-                <AttributeList>
-                  <Culture>en-US</Culture>
-                  <Text>MOTOR CENTRADOR SENTIDO INVERSO</Text>
-                </AttributeList>
-              </MultilingualTextItem>
-              <MultilingualTextItem ID="34" CompositionName="Items">
-                <AttributeList>
-                  <Culture>it-IT</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-            </ObjectList>
-          </MultilingualText>
-        </ObjectList>
-      </SW.Blocks.CompileUnit>
-      <SW.Blocks.CompileUnit ID="35" CompositionName="CompileUnits">
-        <AttributeList>
-          <NetworkSource />
-          <ProgrammingLanguage>LAD</ProgrammingLanguage>
-        </AttributeList>
-        <ObjectList>
-          <MultilingualText ID="36" CompositionName="Comment">
-            <ObjectList>
-              <MultilingualTextItem ID="37" CompositionName="Items">
-                <AttributeList>
-                  <Culture>en-US</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-              <MultilingualTextItem ID="38" CompositionName="Items">
-                <AttributeList>
-                  <Culture>it-IT</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-            </ObjectList>
-          </MultilingualText>
-          <MultilingualText ID="39" CompositionName="Title">
-            <ObjectList>
-              <MultilingualTextItem ID="3A" CompositionName="Items">
-                <AttributeList>
-                  <Culture>en-US</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-              <MultilingualTextItem ID="3B" CompositionName="Items">
-                <AttributeList>
-                  <Culture>it-IT</Culture>
-                  <Text />
-                </AttributeList>
-              </MultilingualTextItem>
-            </ObjectList>
-          </MultilingualText>
-        </ObjectList>
-      </SW.Blocks.CompileUnit>
-      <MultilingualText ID="3C" CompositionName="Title">
-        <ObjectList>
-          <MultilingualTextItem ID="3D" CompositionName="Items">
+          <MultilingualTextItem ID="2F" CompositionName="Items">
             <AttributeList>
               <Culture>en-US</Culture>
               <Text>CONTROLO DE CENTRADOR DE PALETES</Text>
             </AttributeList>
           </MultilingualTextItem>
-          <MultilingualTextItem ID="3E" CompositionName="Items">
+          <MultilingualTextItem ID="30" CompositionName="Items">
             <AttributeList>
               <Culture>it-IT</Culture>
               <Text />
@@ -828,5 +723,5 @@
         </ObjectList>
       </MultilingualText>
     </ObjectList>
-  </SW.Blocks.FC>
+  </SW.Blocks.FB>
 </Document>
